@@ -16,7 +16,11 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    RootViewController *root = [[RootViewController alloc]init];
+    UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:root];
+    nav.navigationBar.backgroundColor = [UIColor yellowColor];
+    self.window.rootViewController = nav;
     return YES;
 }
 

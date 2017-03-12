@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  RootViewController.h
 //  ExpressFun
 //
 //  Created by 翟留闯 on 2017/3/12.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface RootViewController : UIViewController
 
 @end
-

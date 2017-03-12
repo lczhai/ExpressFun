@@ -19,7 +19,14 @@
     
     RootViewController *root = [[RootViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:root];
-    nav.navigationBar.backgroundColor = [UIColor yellowColor];
+    nav.navigationBar.barTintColor = [UIColor orangeColor];
+    //设置导航字体颜色
+    [nav.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    
+    
+
+    
+    
     self.window.rootViewController = nav;
     return YES;
 }

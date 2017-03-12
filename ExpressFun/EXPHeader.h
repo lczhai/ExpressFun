@@ -27,9 +27,9 @@
 
 
 //组件
-#import "AFNetworking.h" //首页
-#import "MJRefresh.h" //首页
-#import "SVProgressHUD.h" //首页
+#import "AFNetworking.h" //afn
+#import "MJRefresh.h" //loading
+#import "SVProgressHUD.h" //toast
 
 
 

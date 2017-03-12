@@ -8,8 +8,14 @@
 
 #import "RootViewController.h"
 
-@interface RootViewController ()
 
+@interface RootViewController ()
+{
+    NSArray *tagArray;
+    UITableView *tv;
+    UIScrollView *expScrollView;
+    UIView *backView;
+}
 @end
 
 @implementation RootViewController
@@ -17,9 +23,92 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"表趣";
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor colorWithRed:228/255.0 green:106/255.0 blue:17/255.0 alpha:1.0];
+    tagArray =@[@"手气不错",@"新品发售",@"热门搞笑",@"个人制作"];
+    self.navigationController.navigationBar.translucent=YES;
+    
+    [self creatUI];
 }
 
+
+- (void)creatUI
+{
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+    
+    
+    backView = [[UIView alloc]initWithFrame:CGRectMake(0, 23, self.view.frame.size.width/tagArray.count, 2)];
+    backView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:backView];
+    
+    
+    for (int i = 0; i<tagArray.count; i++) {
+        UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.size.width/tagArray.count*i, 0, self.view.frame.size.width/tagArray.count, 25)];
+        btn.tag = i+11;
+        [btn setTitle:tagArray[i] forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [btn addTarget:self action:@selector(btn_touch:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:btn];
+    }
+    
+    
+    
+    expScrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(backView.frame), SCREEN_WIDTH, SCREEN_HEIGHT-backView.frame.size.height-64)];
+    expScrollView.contentSize = CGSizeMake(SCREEN_WIDTH*tagArray.count, 0);
+    expScrollView.backgroundColor = [UIColor whiteColor];
+    expScrollView.scrollEnabled = YES;
+    expScrollView.directionalLockEnabled = YES;
+    expScrollView.showsHorizontalScrollIndicator = NO;
+    expScrollView.pagingEnabled = YES;
+    expScrollView.delegate = self;
+    [self.view addSubview:expScrollView];
+    
+    
+    
+    
+    UIView *view1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-26-64)];
+    view1.backgroundColor = [UIColor yellowColor];
+    [expScrollView addSubview:view1];
+    
+    UIView *view2 = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*1, 0, self.view.frame.size.width, self.view.frame.size.height-26-64)];
+    view2.backgroundColor = [UIColor greenColor];
+    [expScrollView addSubview:view2];
+    
+    UIView *view3 = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*2, 0, self.view.frame.size.width, self.view.frame.size.height-26-64)];
+    view3.backgroundColor = [UIColor purpleColor];
+    [expScrollView addSubview:view3];
+    
+    UIView *view4 = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*3, 0, self.view.frame.size.width, self.view.frame.size.height-26-64)];
+    view4.backgroundColor = [UIColor brownColor];
+    [expScrollView addSubview:view4];
+}
+
+
+- (void)btn_touch:(UIButton *)sender
+{
+    
+    expScrollView.contentOffset = CGPointMake(self.view.frame.size.width*(sender.tag-11), 0);
+    [UIView animateWithDuration:0.2 animations:^{
+        backView.center = sender.center;
+    }];
+}
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    
+//    int page = scrollView.contentOffset.x/self.view.frame.size.width;
+    
+//    NSLog(@"%f",scrollView.contentOffset.x);
+    
+//    UIButton *btn = (id)[self.view viewWithTag:page+11];
+    
+//    [UIView animateWithDuration:0.2 animations:^{
+        backView.center = CGPointMake(scrollView.contentOffset.x/tagArray.count + backView.frame.size.width/2, backView.center.y);
+//    }];
+    
+}
 
 
 

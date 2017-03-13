@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B67D1FC1E76C65B0097EE08 /* ExpressCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67D1FB1E76C65B0097EE08 /* ExpressCollectionView.m */; };
+		2B67D2041E76CE7D0097EE08 /* ExpressCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67D2021E76CE7D0097EE08 /* ExpressCollectionCell.m */; };
+		2B67D20F1E76DD090097EE08 /* DataControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67D20D1E76DD090097EE08 /* DataControl.m */; };
+		2B67D2121E76F3B10097EE08 /* HotExpCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67D2111E76F3B10097EE08 /* HotExpCollectionView.m */; };
+		2B67D2171E7708FD0097EE08 /* UIImage+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67D2141E7708FD0097EE08 /* UIImage+Category.m */; };
+		2B67D2181E7708FD0097EE08 /* UIView+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67D2161E7708FD0097EE08 /* UIView+Category.m */; };
+		2B67D21B1E7709160097EE08 /* InputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67D21A1E7709160097EE08 /* InputView.m */; };
+		2B67D21E1E77092B0097EE08 /* ProcessViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67D21D1E77092B0097EE08 /* ProcessViewController.m */; };
 		2BA372411E758F5A00D4AF71 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA372401E758F5A00D4AF71 /* main.m */; };
 		2BA372441E758F5A00D4AF71 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BA372431E758F5A00D4AF71 /* AppDelegate.m */; };
 		2BA3724A1E758F5A00D4AF71 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BA372481E758F5A00D4AF71 /* Main.storyboard */; };
@@ -40,6 +48,23 @@
 
 /* Begin PBXFileReference section */
 		1123E71DDE135151288DF805 /* Pods-ExpressFunTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpressFunTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ExpressFunTests/Pods-ExpressFunTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2B67D1FA1E76C65B0097EE08 /* ExpressCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressCollectionView.h; sourceTree = "<group>"; };
+		2B67D1FB1E76C65B0097EE08 /* ExpressCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressCollectionView.m; sourceTree = "<group>"; };
+		2B67D2011E76CE7D0097EE08 /* ExpressCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressCollectionCell.h; sourceTree = "<group>"; };
+		2B67D2021E76CE7D0097EE08 /* ExpressCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressCollectionCell.m; sourceTree = "<group>"; };
+		2B67D20C1E76DD090097EE08 /* DataControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataControl.h; sourceTree = "<group>"; };
+		2B67D20D1E76DD090097EE08 /* DataControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataControl.m; sourceTree = "<group>"; };
+		2B67D20E1E76DD090097EE08 /* NetWorkCallbackDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkCallbackDelegate.h; sourceTree = "<group>"; };
+		2B67D2101E76F3B10097EE08 /* HotExpCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotExpCollectionView.h; sourceTree = "<group>"; };
+		2B67D2111E76F3B10097EE08 /* HotExpCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotExpCollectionView.m; sourceTree = "<group>"; };
+		2B67D2131E7708FD0097EE08 /* UIImage+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Category.h"; sourceTree = "<group>"; };
+		2B67D2141E7708FD0097EE08 /* UIImage+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Category.m"; sourceTree = "<group>"; };
+		2B67D2151E7708FD0097EE08 /* UIView+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Category.h"; sourceTree = "<group>"; };
+		2B67D2161E7708FD0097EE08 /* UIView+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Category.m"; sourceTree = "<group>"; };
+		2B67D2191E7709160097EE08 /* InputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputView.h; sourceTree = "<group>"; };
+		2B67D21A1E7709160097EE08 /* InputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputView.m; sourceTree = "<group>"; };
+		2B67D21C1E77092B0097EE08 /* ProcessViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProcessViewController.h; sourceTree = "<group>"; };
+		2B67D21D1E77092B0097EE08 /* ProcessViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProcessViewController.m; sourceTree = "<group>"; };
 		2BA3723C1E758F5A00D4AF71 /* ExpressFun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpressFun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BA372401E758F5A00D4AF71 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2BA372421E758F5A00D4AF71 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -96,6 +121,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B67D2001E76CE340097EE08 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				2B67D2011E76CE7D0097EE08 /* ExpressCollectionCell.h */,
+				2B67D2021E76CE7D0097EE08 /* ExpressCollectionCell.m */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		2B67D20B1E76DCF20097EE08 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				2B67D20C1E76DD090097EE08 /* DataControl.h */,
+				2B67D20D1E76DD090097EE08 /* DataControl.m */,
+				2B67D20E1E76DD090097EE08 /* NetWorkCallbackDelegate.h */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
 		2BA372331E758F5A00D4AF71 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +165,7 @@
 		2BA3723E1E758F5A00D4AF71 /* ExpressFun */ = {
 			isa = PBXGroup;
 			children = (
+				2B67D20B1E76DCF20097EE08 /* Other */,
 				2BA372781E75918900D4AF71 /* Components */,
 				2BA372771E75917600D4AF71 /* ViewController */,
 				2BA372761E75912900D4AF71 /* Category */,
@@ -167,6 +212,13 @@
 		2BA372751E75911C00D4AF71 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2B67D2191E7709160097EE08 /* InputView.h */,
+				2B67D21A1E7709160097EE08 /* InputView.m */,
+				2B67D2001E76CE340097EE08 /* Cell */,
+				2B67D1FA1E76C65B0097EE08 /* ExpressCollectionView.h */,
+				2B67D1FB1E76C65B0097EE08 /* ExpressCollectionView.m */,
+				2B67D2101E76F3B10097EE08 /* HotExpCollectionView.h */,
+				2B67D2111E76F3B10097EE08 /* HotExpCollectionView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -174,6 +226,10 @@
 		2BA372761E75912900D4AF71 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				2B67D2131E7708FD0097EE08 /* UIImage+Category.h */,
+				2B67D2141E7708FD0097EE08 /* UIImage+Category.m */,
+				2B67D2151E7708FD0097EE08 /* UIView+Category.h */,
+				2B67D2161E7708FD0097EE08 /* UIView+Category.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -183,6 +239,8 @@
 			children = (
 				2BA372791E7591D800D4AF71 /* RootViewController.h */,
 				2BA3727A1E7591D800D4AF71 /* RootViewController.m */,
+				2B67D21C1E77092B0097EE08 /* ProcessViewController.h */,
+				2B67D21D1E77092B0097EE08 /* ProcessViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -500,10 +558,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B67D2121E76F3B10097EE08 /* HotExpCollectionView.m in Sources */,
+				2B67D2041E76CE7D0097EE08 /* ExpressCollectionCell.m in Sources */,
 				2BA372441E758F5A00D4AF71 /* AppDelegate.m in Sources */,
 				2BA3724D1E758F5A00D4AF71 /* ExpressFun.xcdatamodeld in Sources */,
+				2B67D21E1E77092B0097EE08 /* ProcessViewController.m in Sources */,
+				2B67D1FC1E76C65B0097EE08 /* ExpressCollectionView.m in Sources */,
+				2B67D2171E7708FD0097EE08 /* UIImage+Category.m in Sources */,
 				2BA3727B1E7591D800D4AF71 /* RootViewController.m in Sources */,
+				2B67D20F1E76DD090097EE08 /* DataControl.m in Sources */,
+				2B67D2181E7708FD0097EE08 /* UIView+Category.m in Sources */,
 				2BA372411E758F5A00D4AF71 /* main.m in Sources */,
+				2B67D21B1E7709160097EE08 /* InputView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -749,6 +815,7 @@
 				2BA3726E1E758F5A00D4AF71 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2BA3726F1E758F5A00D4AF71 /* Build configuration list for PBXNativeTarget "ExpressFunTests" */ = {
 			isa = XCConfigurationList;
@@ -757,6 +824,7 @@
 				2BA372711E758F5A00D4AF71 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2BA372721E758F5A00D4AF71 /* Build configuration list for PBXNativeTarget "ExpressFunUITests" */ = {
 			isa = XCConfigurationList;
@@ -765,6 +833,7 @@
 				2BA372741E758F5A00D4AF71 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

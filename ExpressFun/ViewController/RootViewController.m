@@ -39,7 +39,7 @@
     
     
     backView = [[UIView alloc]initWithFrame:CGRectMake(0, 23, self.view.frame.size.width/tagArray.count, 2)];
-    backView.backgroundColor = [UIColor whiteColor];
+    backView.backgroundColor = [UIColor greenColor];
     [self.view addSubview:backView];
     
     
@@ -67,37 +67,56 @@
     
     
     
-    UIView *view1 = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-26-64)];
-    view1.backgroundColor = [UIColor yellowColor];
-    [expScrollView addSubview:view1];
+    //好运数据
+    ExpressCollectionView *goodluck = [[ExpressCollectionView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-26-64) withKeyword:@"goodluck"];
+    goodluck.backgroundColor = [UIColor yellowColor];
+    [expScrollView addSubview:goodluck];
+    [goodluck setBlock:^(NSString *urlString) {
+        NSLog(@"图片地址：%@",urlString);
+        NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
+        UIImage *img = [UIImage imageWithData:imgData];
+        
+        ProcessViewController *process = [[ProcessViewController alloc]init];
+        [process initWithSourceImage:img];
+        [self.navigationController pushViewController:process animated:YES];
+    }];
     
-    UIView *view2 = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*1, 0, self.view.frame.size.width, self.view.frame.size.height-26-64)];
-    view2.backgroundColor = [UIColor greenColor];
-    [expScrollView addSubview:view2];
+    ExpressCollectionView *recommend = [[ExpressCollectionView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*1, 0, self.view.frame.size.width, self.view.frame.size.height-26-64) withKeyword:@"recommend"];
+    recommend.backgroundColor = [UIColor greenColor];
+    [expScrollView addSubview:recommend];
+    [recommend setBlock:^(NSString *urlString) {
+        NSLog(@"图片地址：%@",urlString);
+    }];
     
-    UIView *view3 = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*2, 0, self.view.frame.size.width, self.view.frame.size.height-26-64)];
-    view3.backgroundColor = [UIColor purpleColor];
-    [expScrollView addSubview:view3];
+
+    ExpressCollectionView *hotView = [[ExpressCollectionView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*2, 0, self.view.frame.size.width, self.view.frame.size.height-26-64) withKeyword:@"hot"];
+    hotView.backgroundColor = [UIColor purpleColor];
+    [expScrollView addSubview:hotView];
+    [hotView setBlock:^(NSString *urlString) {
+        NSLog(@"图片地址：%@",urlString);
+    }];
     
-    UIView *view4 = [[UIView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*3, 0, self.view.frame.size.width, self.view.frame.size.height-26-64)];
-    view4.backgroundColor = [UIColor brownColor];
-    [expScrollView addSubview:view4];
+    ExpressCollectionView *mine = [[ExpressCollectionView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*3, 0, self.view.frame.size.width, self.view.frame.size.height-26-64) withKeyword:@"mine"];
+    mine.backgroundColor = [UIColor brownColor];
+    [expScrollView addSubview:mine];
+    [mine setBlock:^(NSString *urlString) {
+        NSLog(@"图片地址：%@",urlString);
+    }];
+    
 }
 
 
 - (void)btn_touch:(UIButton *)sender
 {
-    
     expScrollView.contentOffset = CGPointMake(self.view.frame.size.width*(sender.tag-11), 0);
-    [UIView animateWithDuration:0.2 animations:^{
-        backView.center = sender.center;
+    [UIView animateWithDuration:0.5 animations:^{
+        backView.center = CGPointMake(sender.center.x , backView.center.y);
     }];
 }
 
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    
 //    int page = scrollView.contentOffset.x/self.view.frame.size.width;
     
 //    NSLog(@"%f",scrollView.contentOffset.x);

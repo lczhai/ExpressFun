@@ -14,6 +14,7 @@
 @interface ProcessViewController : UIViewController
 
 //- (instancetype)initWithSourceImage:(UIImage *)image handleImageBlock:(HandleImageBlock)imageBlock;
+@property (strong, nonatomic) UIImage                   * sourceImage;//原图片
 
 - (instancetype)initWithSourceImage:(UIImage *)image;
 

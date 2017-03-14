@@ -106,6 +106,7 @@
 
 #pragma mark --加载数据
 - (void)loadData:(NSString *)keyword{
+    [SVProgressHUD show];
     
     //requestCode:  0：手气不错  1：新品发售  2：热门搞笑  3：个人制造
     
@@ -128,6 +129,7 @@
 
 //网络请求成功回调
 -(void)callBackWithData:(id)data requestCode:(int)requestCode{
+    [SVProgressHUD dismiss];
     if(requestCode == 0){
          luckSource == nil ? luckSource = [[NSMutableArray alloc]init] : [luckSource removeAllObjects];
         [luckSource addObjectsFromArray:data];
@@ -151,6 +153,7 @@
 
 //网络请求失败回调
 - (void)callBackWithErrorCode:(int)code message:(NSString *)message innerError:(NSError *)error requestCode:(int)requestCode{
+    [SVProgressHUD dismiss];
     [SVProgressHUD showErrorWithStatus:message];
 }
 

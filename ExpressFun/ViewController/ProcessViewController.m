@@ -16,7 +16,7 @@
 
 
 @interface ProcessViewController ()<UIGestureRecognizerDelegate>
-@property (strong, nonatomic) UIImage                   * sourceImage;//原图片
+
 
 @property (strong, nonatomic) UIImageView               * baseImageView;
 
@@ -30,6 +30,8 @@
 
 @implementation ProcessViewController
 
+
+@synthesize sourceImage;
 
 
 - (void)viewDidLoad {
@@ -50,7 +52,7 @@
 {
     self = [super init];
     if (self) {
-        _sourceImage = image;
+        sourceImage = image;
     }
     return self;
 }
@@ -62,7 +64,7 @@
     //设置背景颜色
     self.view.backgroundColor = [UIColor blackColor];
     _baseImageView = ({
-        UIImageView * imageView = [[UIImageView alloc] initWithImage:_sourceImage];
+        UIImageView * imageView = [[UIImageView alloc] initWithImage:sourceImage];
         imageView.userInteractionEnabled = YES;
         imageView.clipsToBounds = YES;
         imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -70,7 +72,7 @@
         imageView;
     });
     
-    CGSize newImageSize = _sourceImage.size;
+    CGSize newImageSize = sourceImage.size;
     newImageSize = CGSizeMake(NOW_SCR_W - 60, (NOW_SCR_W - 60) / newImageSize.width * newImageSize.height);
     
     
@@ -118,7 +120,12 @@
 - (void)sure
 {
     UIImage * newImage = [_baseImageView convertViewToImage];
-    [self loadImageFinished:newImage];
+    
+    
+    ShareExpressionViewController *shareViewController = [[ShareExpressionViewController alloc]init];
+    shareViewController.completeImage =  newImage;
+    [self.navigationController pushViewController:shareViewController animated:YES];
+//    [self loadImageFinished:newImage];
 }
 
 

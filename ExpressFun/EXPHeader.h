@@ -30,6 +30,7 @@
 #import "InputView.h"
 #import "UIImage+Category.h"
 #import "UIView+Category.h"
+#import "ShareExpressionViewController.h"//表情完成分享页
 
 
 
@@ -39,6 +40,7 @@
 #import "ExpressCollectionCell.h"
 #import "HotExpCollectionView.h"
 
+
 //组件
 #import "AFNetworking.h" //afn
 #import "MJRefresh.h" //loading
@@ -46,6 +48,16 @@
 #import "UIImageView+WebCache.h"//img
 #import "Masonry.h" //auto layout
 
+
+
+//分享Api
+#import "WXApi.h"
+#import <TencentOpenAPI/TencentOAuth.h>
+#import "WeiboSDK.h"
+#import "XMShareWeiboUtil.h"
+#import "XMShareWechatUtil.h"
+#import "XMShareQQUtil.h"
+#import "XMShareView.h"
 
 
 

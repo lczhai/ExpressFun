@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<WeiboSDKDelegate,WXApiDelegate>
 
 @end
 
@@ -16,6 +16,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    [self setLoadingStyle];//设置loading样式
+    [self init3rdParty];//初始化分享SDK
     
     RootViewController *root = [[RootViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:root];
@@ -30,6 +33,76 @@
     self.window.rootViewController = nav;
     return YES;
 }
+
+//设置loding样式
+- (void)setLoadingStyle{
+    [SVProgressHUD setDefaultStyle:SVProgressHUDStyleCustom];//黑色背景
+    [SVProgressHUD setMinimumDismissTimeInterval:1];//提示持续时长
+    [SVProgressHUD setDefaultMaskType:2];//渐变效果
+    [SVProgressHUD setBackgroundColor:[UIColor colorWithWhite:0.110 alpha:0.900]];//提示框背景色
+    [SVProgressHUD setForegroundColor:[UIColor whiteColor]];//提示框前景色
+    [SVProgressHUD setCornerRadius:8];//提示框圆角
+    [SVProgressHUD setFont:[UIFont fontWithName:@"Helvetica-Bold" size:14]];
+    
+
+}
+
+//初始化第三方库
+- (void)init3rdParty
+{
+    [WXApi registerApp:@"wx3b667430e3bf36ba"];
+    
+    [WeiboSDK enableDebugMode:YES];
+    [WeiboSDK registerApp:@"4109726756"];
+    
+    //    TencentOAuth *tencentOAuth = [[TencentOAuth alloc]initWithAppId:@"1105241898" andDelegate:self];
+    
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    if ([[url absoluteString] hasPrefix:@"tencent"]) {
+        
+        return [TencentOAuth HandleOpenURL:url];
+        
+    }else if([[url absoluteString] hasPrefix:@"wb"]){
+        
+        return [WeiboSDK handleOpenURL:url delegate:self];
+        
+    }
+    else if([[url absoluteString] hasPrefix:@"WX"]){
+        
+        return [WXApi handleOpenURL:url delegate:self];
+        
+    }
+    
+    return NO;
+}
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    if ([WXApi handleOpenURL:url delegate:self]) {
+        return [WXApi handleOpenURL:url delegate:self];
+    }
+    else if([WeiboSDK handleOpenURL:url delegate:self])
+    {
+        return [WeiboSDK handleOpenURL:url delegate:self];
+    }
+    else
+    {
+        return [TencentOAuth HandleOpenURL:url];
+    }
+}
+
+- (void)didReceiveWeiboRequest:(WBBaseRequest *)request
+{
+    
+}
+- (void)didReceiveWeiboResponse:(WBBaseResponse *)response
+{
+    
+}
+
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

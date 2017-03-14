@@ -77,7 +77,8 @@
         UIImage *img = [UIImage imageWithData:imgData];
         
         ProcessViewController *process = [[ProcessViewController alloc]init];
-        [process initWithSourceImage:img];
+        process.sourceImage = img;
+//        [process initWithSourceImage:img];
         [self.navigationController pushViewController:process animated:YES];
     }];
     

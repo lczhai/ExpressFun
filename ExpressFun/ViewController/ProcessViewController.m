@@ -49,6 +49,9 @@
 {
     self.navigationController.navigationBar.hidden = NO;
 }
+- (void)viewWillAppear:(BOOL)animated{
+    self.navigationController.navigationBar.hidden = YES;
+}
 
 
 - (instancetype)initWithSourceImage:(UIImage *)image
@@ -80,7 +83,7 @@
     
     
     [_baseImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(NOW_SCR_W - 60, NOW_SCR_H - 100));
+        make.size.mas_equalTo(CGSizeMake(sourceImage.size.width, sourceImage.size.height));
         make.center.equalTo(self.view);
     }];
     
@@ -248,6 +251,9 @@
     newImageView.userInteractionEnabled = YES;
     [textView addSubview:newImageView];
     
+    
+    
+    
     newImageView.frame = CGRectMake(30, 30, imageSize.width, imageSize.height);
     
     UITapGestureRecognizer * baseTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(baseImageViewTapGesture:)];
@@ -310,7 +316,10 @@
 #pragma  mark点空白处收起操作按钮（删除和移动）
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
+    _currentView.layer.borderWidth = 0;
+    
     for (UIView * view in _currentView.subviews) {
+        _currentView.layer.borderWidth = 0;
         if ([view isKindOfClass:[UIButton class]]) {
             [view removeFromSuperview];
         }
@@ -331,6 +340,8 @@
 #pragma mark -- gesture
 - (void)sourceImageViewTapGesture:(UITapGestureRecognizer *)tapGesture
 {
+    NSLog(@"321");
+    _currentView.layer.borderWidth = 0;
     for (UIView * view in _currentView.subviews) {
         if ([view isKindOfClass:[UIButton class]]) {
             [view removeFromSuperview];
@@ -418,7 +429,7 @@
         _currentView.bounds= CGRectMake(0, 0, wChange, hChange);
         //subviews[0] 打码表示图imageView
         _currentView.subviews[0].frame = CGRectMake(30, 30, CGRectGetMaxX(_currentView.bounds) -60, CGRectGetMaxY(_currentView.bounds) - 60);
-        _moveButton.frame = CGRectMake(CGRectGetMaxX(_currentView.bounds) - 20, CGRectGetMaxY(_currentView.bounds) - 20, 20, 20);
+        _moveButton.frame = CGRectMake(CGRectGetMaxX(_currentView.bounds) - 30, CGRectGetMaxY(_currentView.bounds) - 30, 30, 30);
         
         
         
@@ -470,13 +481,13 @@
     [self.view addSubview:sureButton];
     
     [cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.equalTo(@10);
+        make.left.top.equalTo(@30);
         make.size.mas_equalTo(CGSizeMake(80, 30));
     }];
     
     [sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@10);
-        make.right.equalTo(@-10);
+        make.top.equalTo(@30);
+        make.right.equalTo(@-30);
         make.size.mas_equalTo(CGSizeMake(80, 30));
     }];
 }
@@ -529,6 +540,7 @@
  */
 - (void)createOptionButton
 {
+    
     //删除
     UIButton * deleteBut = [UIButton buttonWithType:UIButtonTypeCustom];
 //    deleteBut.backgroundColor = [UIColor redColor];
@@ -537,9 +549,13 @@
     [_currentView addSubview:deleteBut];
     
     [deleteBut mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(20, 20));
+        make.size.mas_equalTo(CGSizeMake(30, 30));
         make.top.left.equalTo(@0);
     }];
+    
+    
+    _currentView.layer.borderWidth = 2;
+    _currentView.layer.borderColor = [UIColor colorWithWhite:0.8 alpha:0.6].CGColor;
     
     //移动
     UIButton * removeBut = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -547,7 +563,7 @@
     [_currentView addSubview:removeBut];
     _moveButton = removeBut;
     
-    removeBut.frame = CGRectMake(CGRectGetMaxX(_currentView.bounds) - 15, CGRectGetMaxY(_currentView.bounds) - 20, 20, 20);
+    removeBut.frame = CGRectMake(CGRectGetMaxX(_currentView.bounds) - 30, CGRectGetMaxY(_currentView.bounds) - 30, 30, 30);
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureDetected:)];
     [panGestureRecognizer setDelegate:self];
     [removeBut addGestureRecognizer:panGestureRecognizer];

@@ -32,6 +32,8 @@
 #import "UIView+Category.h"
 #import "ShareExpressionViewController.h"//表情完成分享页
 
+#import "ColorView.h"//选择颜色
+
 
 
 

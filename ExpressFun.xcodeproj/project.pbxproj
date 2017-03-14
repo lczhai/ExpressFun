@@ -53,6 +53,7 @@
 		2BDBA3FC1E782D9700E6A694 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BDBA3FB1E782D9700E6A694 /* libz.tbd */; };
 		2BDBA3FE1E782DA300E6A694 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BDBA3FD1E782DA300E6A694 /* ImageIO.framework */; };
 		2BDBA4001E782DB900E6A694 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BDBA3FF1E782DB900E6A694 /* Foundation.framework */; };
+		2BDBA4031E78467C00E6A694 /* ColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDBA4021E78467C00E6A694 /* ColorView.m */; };
 		69FAED33D4FBB5E4813E1A4D /* libPods-ExpressFunTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3CD9581F44768BB8A23D15 /* libPods-ExpressFunTests.a */; };
 		7717E4E1F2F975E2D9CCEE3B /* libPods-ExpressFunUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4ECADD4AEBF6BCCC9E027A /* libPods-ExpressFunUITests.a */; };
 		C457BACAC713E5FE0907032C /* libPods-ExpressFun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA12E0CAE561C2F0B797777 /* libPods-ExpressFun.a */; };
@@ -163,6 +164,8 @@
 		2BDBA3FB1E782D9700E6A694 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		2BDBA3FD1E782DA300E6A694 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		2BDBA3FF1E782DB900E6A694 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2BDBA4011E78467C00E6A694 /* ColorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorView.h; sourceTree = "<group>"; };
+		2BDBA4021E78467C00E6A694 /* ColorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorView.m; sourceTree = "<group>"; };
 		2C95C4DE04DE1D35DA3D25C6 /* Pods-ExpressFunTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpressFunTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ExpressFunTests/Pods-ExpressFunTests.release.xcconfig"; sourceTree = "<group>"; };
 		2DA12E0CAE561C2F0B797777 /* libPods-ExpressFun.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ExpressFun.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54611A0222399564377AE11F /* Pods-ExpressFun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpressFun.release.xcconfig"; path = "Pods/Target Support Files/Pods-ExpressFun/Pods-ExpressFun.release.xcconfig"; sourceTree = "<group>"; };
@@ -307,6 +310,8 @@
 			children = (
 				2B67D2191E7709160097EE08 /* InputView.h */,
 				2B67D21A1E7709160097EE08 /* InputView.m */,
+				2BDBA4011E78467C00E6A694 /* ColorView.h */,
+				2BDBA4021E78467C00E6A694 /* ColorView.m */,
 				2B67D2001E76CE340097EE08 /* Cell */,
 				2B67D1FA1E76C65B0097EE08 /* ExpressCollectionView.h */,
 				2B67D1FB1E76C65B0097EE08 /* ExpressCollectionView.m */,
@@ -783,6 +788,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BDBA4031E78467C00E6A694 /* ColorView.m in Sources */,
 				2BDBA3EC1E78249000E6A694 /* XMShareView.m in Sources */,
 				2BDBA3E81E78249000E6A694 /* XMShareQQUtil.m in Sources */,
 				2B67D2121E76F3B10097EE08 /* HotExpCollectionView.m in Sources */,

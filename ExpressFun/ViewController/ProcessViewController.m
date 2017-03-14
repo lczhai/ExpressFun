@@ -26,6 +26,8 @@
 @property (strong, nonatomic) UIButton                  * moveButton;
 
 @property (strong, nonatomic) InputView                 * inputView;
+
+@property (strong,nonatomic)  UIColor                   *textColor;
 @end
 
 @implementation ProcessViewController
@@ -37,6 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"process";
+    _textColor = [UIColor whiteColor];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.hidden = YES;
     [self initializeUserInterface];
@@ -168,6 +171,20 @@
 
 
 /**
+ 
+ 改变字体颜色
+ 
+ */
+- (void)changeColorButtonPressed:(UIButton *)sender{
+    
+    UIButton *colorButton = [self.view viewWithTag:1001];
+    ColorView *colorview = [[ColorView alloc]initWithSubView:self.view sureBlock:^(UIColor *color) {
+        [colorButton setTitleColor:color forState:UIControlStateNormal];
+        _textColor = color;
+    }];
+}
+
+/**
  添加文字
  
  */
@@ -176,7 +193,7 @@
     weakify(self);
     InputView * inputView = [[InputView alloc] initWithSubView:self.view sureBlock:^(NSString *text) {
         UILabel * label = [[UILabel alloc] init];
-        label.textColor = [UIColor whiteColor];
+        label.textColor = _textColor;
         label.font = [UIFont boldSystemFontOfSize:20];
         label.textAlignment = NSTextAlignmentCenter;
         label.text = text;
@@ -470,18 +487,18 @@
  */
 - (void)createBottomButton
 {
-    NSArray * bottomTitleArray = [NSArray arrayWithObjects:@"旋转",@"文字",@"打码", nil];
+    NSArray * bottomTitleArray = [NSArray arrayWithObjects:@"旋转",@"颜色",@"文字",@"打码", nil];
     CGFloat margin = 20;
     CGFloat button_W = 70;
     
-    CGFloat buttonMargin = (NOW_SCR_W - margin * 2 - button_W)/2.0;
+    CGFloat buttonMargin = (NOW_SCR_W - margin * 2 - button_W)/3.0;
     
     for (int i = 0; i < bottomTitleArray.count; i ++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
         button.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.4];
         [button setTitle:bottomTitleArray[i] forState:UIControlStateNormal];
         [self.view addSubview:button];
-        
+        button.tag = 1000+i;
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(margin + buttonMargin * i);
             make.bottom.equalTo(@-10);
@@ -491,12 +508,17 @@
         if (i == 0) {
             [button addTarget:self action:@selector(rotateImageViewButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         }else if ( i == 1){
+            [button addTarget:self action:@selector(changeColorButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        }else if ( i == 2){
             [button addTarget:self action:@selector(addWordsButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         }else{
             [button addTarget:self action:@selector(addBlurryButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         }
     }
 }
+
+
+
 
 
 /**

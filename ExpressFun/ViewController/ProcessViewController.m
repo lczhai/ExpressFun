@@ -203,6 +203,7 @@
         label.adjustsFontSizeToFitWidth = YES;
         [weakSelf.baseImageView addSubview:label];
         
+        
         // 设置文字属性 要和label的一致
         NSDictionary *attrs = @{NSFontAttributeName : [UIFont systemFontOfSize:20]};
         
@@ -218,7 +219,10 @@
             make.height.equalTo(@30);
             make.center.equalTo(weakSelf.baseImageView);
         }];
-        [self performSelector:@selector(createTextImageViewWithView:) withObject:label afterDelay:0.01];
+        
+        
+        
+        [self performSelector:@selector(createTextImageViewWithView:) withObject:label afterDelay:0.3];
     }];
     
 }
@@ -231,7 +235,6 @@
  */
 - (void)createTextImageViewWithView:(UIView *)view
 {
-    
     UIView * textView = [[UIView alloc] init];
     [_baseImageView addSubview:textView];
     _currentView = textView;
@@ -340,7 +343,7 @@
 #pragma mark -- gesture
 - (void)sourceImageViewTapGesture:(UITapGestureRecognizer *)tapGesture
 {
-    NSLog(@"321");
+
     _currentView.layer.borderWidth = 0;
     for (UIView * view in _currentView.subviews) {
         if ([view isKindOfClass:[UIButton class]]) {

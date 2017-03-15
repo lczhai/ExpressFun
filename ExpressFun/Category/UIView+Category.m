@@ -31,7 +31,6 @@
 
 - (UIImage *)screenshotWithRect:(CGRect)rect;
 {
-    
     if (rect.origin.y+rect.size.height > self.frame.size.height) {
         rect.origin.y = self.frame.size.height-rect.size.height;
     }

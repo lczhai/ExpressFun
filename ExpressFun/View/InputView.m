@@ -75,6 +75,7 @@
 {
     if (textField.text.length > 0) {
         if (self.sureInputBlock) {
+            
             self.sureInputBlock(textField.text);
         }
     }

@@ -60,11 +60,11 @@
             [_collectionView registerClass:[ExpressCollectionCell class] forCellWithReuseIdentifier:keyword];
             _collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
                 newestPageIndex = 0;
-                [hotSource removeAllObjects];
+                [newestSource removeAllObjects];
                 [self loadData:keyword];
             }];
-            _collectionView.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
-                hotPageIndex = newestPageIndex + pageSize;
+            _collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+                newestPageIndex = newestPageIndex + pageSize;
                 [self loadData:keyword];
             }];
         }
@@ -75,7 +75,7 @@
                 [hotSource removeAllObjects];
                 [self loadData:keyword];
             }];
-            _collectionView.mj_footer = [MJRefreshFooter footerWithRefreshingBlock:^{
+            _collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
                 hotPageIndex = hotPageIndex + pageSize;
                 [self loadData:keyword];
             }];
@@ -113,8 +113,8 @@
     if([keyword isEqualToString:@"goodluck"]){
         [DataControl netGetRequestWithRequestCode:0 URL:@"/goodluck" parameters:nil callBackDelegate:self];
     }else if ([keyword isEqualToString:@"recommend"]){
-        NSString *urlString = [NSString stringWithFormat:@"/list/recommend?begin=%d&offset=%d",newestPageIndex,pageSize];
-        [DataControl netGetRequestWithRequestCode:2 URL:urlString parameters:nil callBackDelegate:self];
+        NSString *urlString = [NSString stringWithFormat:@"/list?begin=%d&offset=%d",newestPageIndex,pageSize];
+        [DataControl netGetRequestWithRequestCode:1 URL:urlString parameters:nil callBackDelegate:self];
     }
     else if ([keyword isEqualToString:@"hot"]){
         NSLog(@"热门数据");
@@ -137,10 +137,10 @@
         [self.collectionView.mj_header endRefreshing];
 
     }else if (requestCode == 1){
-        newestSource == nil ? newestSource = [[NSMutableArray alloc]init] : [newestSource removeAllObjects];
-        [newestSource addObjectsFromArray:data];
+        newestSource == nil ? newestSource = [[NSMutableArray alloc]initWithArray:data] : [newestSource addObjectsFromArray:data];
         [self.collectionView reloadData];
         [self.collectionView.mj_header endRefreshing];
+        [self.collectionView.mj_footer endRefreshing];
     }else if (requestCode == 2){
         hotSource == nil ? hotSource = [[NSMutableArray alloc]initWithArray:data] : [hotSource addObjectsFromArray:data];
         [self.collectionView reloadData];

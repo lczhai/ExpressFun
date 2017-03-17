@@ -12,9 +12,9 @@
 ///  APP KEY
 #define APP_KEY_WEIXIN            @"wx3b667430e3bf36ba"
 
-#define APP_KEY_QQ                @"1105241898"
+#define APP_KEY_QQ                @"1106043198"  //表趣
 
-#define APP_KEY_WEIBO             @"4109726756"
+#define APP_KEY_WEIBO             @"2752862027"//表趣
 
 #define APP_KEY_WEIBO_RedirectURL @"http://www.sina.com"
 

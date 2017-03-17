@@ -22,7 +22,7 @@
     
     RootViewController *root = [[RootViewController alloc]init];
     UINavigationController *nav = [[UINavigationController alloc]initWithRootViewController:root];
-    nav.navigationBar.barTintColor = [UIColor orangeColor];
+    nav.navigationBar.barTintColor = [UIColor colorWithRed:253/255.0 green:179/255.0 blue:51/255.0 alpha:1.0];
     //设置导航字体颜色
     [nav.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
@@ -53,9 +53,9 @@
     [WXApi registerApp:@"wx3b667430e3bf36ba"];
     
     [WeiboSDK enableDebugMode:YES];
-    [WeiboSDK registerApp:@"4109726756"];
+    [WeiboSDK registerApp:@"2752862027"];//表趣
     
-    //    TencentOAuth *tencentOAuth = [[TencentOAuth alloc]initWithAppId:@"1105241898" andDelegate:self];
+    //    TencentOAuth *tencentOAuth = [[TencentOAuth alloc]initWithAppId:@"1106043198" andDelegate:self];//表趣
     
 }
 
@@ -165,6 +165,8 @@
     
     return _persistentContainer;
 }
+
+
 
 #pragma mark - Core Data Saving support
 

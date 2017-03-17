@@ -31,8 +31,8 @@
 #import "UIImage+Category.h"
 #import "UIView+Category.h"
 #import "ShareExpressionViewController.h"//表情完成分享页
+#import "AppDelegate.h"
 
-#import "ColorView.h"//选择颜色
 
 
 
@@ -41,6 +41,9 @@
 #import "ExpressCollectionView.h"
 #import "ExpressCollectionCell.h"
 #import "HotExpCollectionView.h"
+#import "ColorView.h"//选择颜色
+
+
 
 
 //组件

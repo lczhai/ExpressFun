@@ -261,6 +261,7 @@
 		2BA3723E1E758F5A00D4AF71 /* ExpressFun */ = {
 			isa = PBXGroup;
 			children = (
+				2BD21C561E7BE061009F7F87 /* Model */,
 				2B67D20B1E76DCF20097EE08 /* Other */,
 				2BA372781E75918900D4AF71 /* Components */,
 				2BA372771E75917600D4AF71 /* ViewController */,
@@ -310,8 +311,8 @@
 			children = (
 				2B67D2191E7709160097EE08 /* InputView.h */,
 				2B67D21A1E7709160097EE08 /* InputView.m */,
-				2BDBA4011E78467C00E6A694 /* ColorView.h */,
 				2BDBA4021E78467C00E6A694 /* ColorView.m */,
+				2BDBA4011E78467C00E6A694 /* ColorView.h */,
 				2B67D2001E76CE340097EE08 /* Cell */,
 				2B67D1FA1E76C65B0097EE08 /* ExpressCollectionView.h */,
 				2B67D1FB1E76C65B0097EE08 /* ExpressCollectionView.m */,
@@ -351,6 +352,13 @@
 				2BDBA3AB1E78248F00E6A694 /* ThreeParty */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		2BD21C561E7BE061009F7F87 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		2BDBA3AB1E78248F00E6A694 /* ThreeParty */ = {

@@ -15,7 +15,11 @@
     
     int hotPageIndex;
     int newestPageIndex;
+    AppDelegate *appDelegate;
 }
+
+
+
 @synthesize newestSource;//最新数据
 @synthesize hotSource;//热门数据
 @synthesize luckSource;//手气数据
@@ -28,6 +32,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        appDelegate = (id)[UIApplication sharedApplication].delegate;
         pageName = keyword;
         pageSize = 12;
         hotPageIndex = 0;
@@ -123,6 +129,7 @@
     }
     else{
         NSLog(@"我的制作");
+        [self getAllDiyImage];
     }
 }
 
@@ -153,6 +160,8 @@
 
 //网络请求失败回调
 - (void)callBackWithErrorCode:(int)code message:(NSString *)message innerError:(NSError *)error requestCode:(int)requestCode{
+    [self.collectionView.mj_header endRefreshing];
+    [self.collectionView.mj_footer endRefreshing];
     [SVProgressHUD dismiss];
     [SVProgressHUD showErrorWithStatus:message];
 }
@@ -194,7 +203,7 @@
     else if ([pageName isEqualToString:@"hot"]){
         return hotSource.count;
     }else{
-        return 10;
+        return mineSource.count;
     }
 }
 #pragma mark --section个数
@@ -219,8 +228,8 @@
     }else{
         ExpressCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"mine" forIndexPath:indexPath];
         
-        cell.imgView.image = [UIImage imageNamed:@"placehoder"];
-        cell.text.text = @"小明库尔";
+        cell.imgView.image = [UIImage imageWithData:[mineSource[indexPath.row] objectForKey:@"imageData"]];
+        cell.text.text = [mineSource[indexPath.row] objectForKey:@"imageName"];
         return cell;
     }
 }
@@ -239,17 +248,16 @@
     #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if([pageName isEqualToString:@"goodluck"]){
         NSString *urlString =[[luckSource[indexPath.row] objectForKey:@"path"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        _block(urlString);
+        _block(urlString,[luckSource[indexPath.row] objectForKey:@"name"]);
     }else if ([pageName isEqualToString:@"recommend"]){
         NSString *urlString =[[newestSource[indexPath.row] objectForKey:@"path"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        _block(urlString);
+        _block(urlString,[luckSource[indexPath.row] objectForKey:@"name"]);
     }
     else if ([pageName isEqualToString:@"hot"]){
         NSString *urlString =[[hotSource[indexPath.row] objectForKey:@"path"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        _block(urlString);
+        _block(urlString,[luckSource[indexPath.row] objectForKey:@"name"]);
     }else{
-        NSString *urlString =[[mineSource[indexPath.row] objectForKey:@"path"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        _block(urlString);
+        [SVProgressHUD showSuccessWithStatus:@"不行"];
     }
     #pragma clang diagnostic pop
 }
@@ -267,6 +275,18 @@
     [cell.imgView sd_setImageWithURL:imgUrl placeholderImage:[UIImage imageNamed:@"placehoder"]];
     cell.text.text = [dataSource[indexPath.row] objectForKey:@"name"];
     return cell;
+}
+
+
+
+//获取数据
+- ( void )getAllDiyImage{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Expression"];
+    NSArray *result = [appDelegate.managedObjectContext executeFetchRequest:request error:nil];
+    
+    mineSource == nil ? mineSource=[[NSMutableArray alloc]initWithArray:result] : [mineSource addObjectsFromArray:result];
+    
+    [self.collectionView reloadData];
 }
 
 @end

@@ -31,15 +31,19 @@
 @end
 
 @implementation ProcessViewController
-
+{
+    AppDelegate *appDelegate;
+}
 
 @synthesize sourceImage;
+
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"process";
     _textColor = [UIColor whiteColor];
+    appDelegate = (id)[UIApplication sharedApplication].delegate;
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.hidden = YES;
     [self initializeUserInterface];
@@ -127,6 +131,9 @@
 {
     UIImage * newImage = [_baseImageView convertViewToImage];
     
+    //将处理好的图片存入数据库
+//    NSData *imageData = UIImagePNGRepresentation(newImage);
+
     
     ShareExpressionViewController *shareViewController = [[ShareExpressionViewController alloc]init];
     shareViewController.completeImage =  newImage;
@@ -572,6 +579,17 @@
     [removeBut addGestureRecognizer:panGestureRecognizer];
 }
 
+
+
+#pragma mark --数据库操作
+
+//获取数据
+- (NSArray *)getAllStudents{
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Expression"];
+    NSArray *result = [appDelegate.managedObjectContext executeFetchRequest:request error:nil];
+    
+    return result;
+}
 
 
 @end

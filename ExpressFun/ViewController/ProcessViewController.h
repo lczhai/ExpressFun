@@ -15,6 +15,7 @@
 
 //- (instancetype)initWithSourceImage:(UIImage *)image handleImageBlock:(HandleImageBlock)imageBlock;
 @property (strong, nonatomic) UIImage                   * sourceImage;//原图片
+@property (strong,nonatomic)  NSString                  * sourceImageName;//图片原名称
 
 - (instancetype)initWithSourceImage:(UIImage *)image;
 

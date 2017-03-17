@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ExpressCollectionView : UIView<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,NetWorkCallbackDelegate>
+@interface ExpressCollectionView : UIView<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,NetWorkCallbackDelegate,UIApplicationDelegate>
 
-@property (nonatomic,copy) void (^block)(NSString *str);
+@property (nonatomic,copy) void (^block)(NSString *str,NSString *name);
 
 //定义集合视图
 @property  UICollectionView *collectionView;

@@ -7,7 +7,7 @@ pod 'MJRefresh', '~> 3.1.12'
 pod 'SDWebImage', '~> 4.0.0'
 pod 'SVProgressHUD', '~> 2.1.2'
 pod 'Masonry', '~> 1.0.2'
-
+pod 'SDWebImage/GIF'
 
 
 

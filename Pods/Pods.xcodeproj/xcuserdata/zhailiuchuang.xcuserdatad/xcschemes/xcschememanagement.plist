@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FLAnimatedImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MJRefresh.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,22 +57,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>15E9A1C8206463B2879F0248AD7BB3C3</key>
+		<key>53F8571E2D572C4069860E38654A566A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2B80D9CB1E35D4E5FCD91B0105A21C85</key>
+		<key>5C0A252B62C032802514A943C52A30F6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6F7A9C8A241592F178588C5CE03AF726</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>7B6E750AA5508250E39CA1D15FAAE054</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>85ED4B3516DB7398106ACC0D4B2206AD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -83,6 +88,11 @@
 			<true/>
 		</dict>
 		<key>B33CA22F5B1ECDEB2924838C12874ED1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EE1EC2284DF64D4824CE46B9024D64F0</key>
 		<dict>
 			<key>primary</key>
 			<true/>

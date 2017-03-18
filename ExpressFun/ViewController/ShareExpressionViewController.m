@@ -36,8 +36,8 @@
     
     showImageView = [[UIImageView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*0.25, SCREEN_HEIGHT*0.15, SCREEN_WIDTH/2, SCREEN_WIDTH/2)];
     showImageView.image = completeImage;
-    showImageView.contentMode = UIViewContentModeCenter;
-//    showImageView.layer.cornerRadius = SCREEN_WIDTH/4;
+    showImageView.contentMode = UIViewContentModeRedraw;
+    //    showImageView.layer.cornerRadius = SCREEN_WIDTH/4;
     showImageView.layer.cornerRadius = 25;
     showImageView.layer.masksToBounds = YES;
     showImageView.layer.borderColor = [UIColor whiteColor].CGColor;

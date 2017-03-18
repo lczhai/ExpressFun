@@ -15,6 +15,9 @@
     UITableView *tv;
     UIScrollView *expScrollView;
     UIView *backView;
+    ExpressCollectionView *mineView;
+    UIImageView *toolImgView;
+    BOOL databaseReload;
 }
 @end
 
@@ -24,6 +27,8 @@
     [super viewDidLoad];
     self.title = @"表趣";
 //    self.view.backgroundColor = [UIColor colorWithRed:228/255.0 green:106/255.0 blue:17/255.0 alpha:1.0];
+    databaseReload = NO;
+    toolImgView = [[UIImageView alloc]init];//工具视图，用于通过SDWebimage转换图片
     self.view.backgroundColor = [UIColor whiteColor];
     tagArray =@[@"手气不错",@"新品发售",@"热门搞笑",@"个人制作"];
     self.navigationController.navigationBar.translucent=YES;
@@ -75,24 +80,21 @@
     goodluck.backgroundColor = [UIColor yellowColor];
     [expScrollView addSubview:goodluck];
     [goodluck setBlock:^(NSString *urlString, NSString *name) {
-        NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
-        UIImage *img = [UIImage imageWithData:imgData];
-        
+        [toolImgView sd_setImageWithURL:[NSURL URLWithString:urlString]];
         ProcessViewController *process = [[ProcessViewController alloc]init];
-        process.sourceImage = img;
+        process.sourceImage = toolImgView.image;
         process.sourceImageName = name;
         [self.navigationController pushViewController:process animated:YES];
     }];
     
-    ExpressCollectionView *recommend = [[ExpressCollectionView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*1, 0, self.view.frame.size.width, self.view.frame.size.height-26-64) withKeyword:@"recommend"];
-    recommend.backgroundColor = [UIColor greenColor];
-    [expScrollView addSubview:recommend];
-    [recommend setBlock:^(NSString *urlString, NSString *name) {
-        NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
-        UIImage *img = [UIImage imageWithData:imgData];
-        
+    //最新数据
+    ExpressCollectionView *newest = [[ExpressCollectionView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*1, 0, self.view.frame.size.width, self.view.frame.size.height-26-64) withKeyword:@"newest"];
+    newest.backgroundColor = [UIColor greenColor];
+    [expScrollView addSubview:newest];
+    [newest setBlock:^(NSString *urlString, NSString *name) {
+        [toolImgView sd_setImageWithURL:[NSURL URLWithString:urlString]];
         ProcessViewController *process = [[ProcessViewController alloc]init];
-        process.sourceImage = img;
+        process.sourceImage = toolImgView.image;
         process.sourceImageName = name;
         [self.navigationController pushViewController:process animated:YES];
     }];
@@ -102,27 +104,39 @@
     hotView.backgroundColor = [UIColor purpleColor];
     [expScrollView addSubview:hotView];
     [hotView setBlock:^(NSString *urlString, NSString *name) {
-        NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
-        UIImage *img = [UIImage imageWithData:imgData];
-        
+        [toolImgView sd_setImageWithURL:[NSURL URLWithString:urlString]];
         ProcessViewController *process = [[ProcessViewController alloc]init];
-        process.sourceImage = img;
+        process.sourceImage = toolImgView.image;
         process.sourceImageName = name;
         [self.navigationController pushViewController:process animated:YES];
     }];
     
     ExpressCollectionView *mine = [[ExpressCollectionView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*3, 0, self.view.frame.size.width, self.view.frame.size.height-26-64) withKeyword:@"mine"];
+    //从消息中心取到消息
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(getDataBaseInfo:) name:DateBaseChange object:nil];
+    mineView = mine;
     mine.backgroundColor = [UIColor brownColor];
     [expScrollView addSubview:mine];
-    [mine setBlock:^(NSString *urlString, NSString *name) {
-        NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:urlString]];
-        UIImage *img = [UIImage imageWithData:imgData];
+    [mine setDataBlock:^(NSData *data, NSString *name, NSString *imgId) {
+        UIImage *img = [UIImage imageWithData:data];
         ProcessViewController *process = [[ProcessViewController alloc]init];
         process.sourceImage = img;
         process.sourceImageName = name;
+        process.imageId = imgId;
         [self.navigationController pushViewController:process animated:YES];
     }];
-    
+}
+#pragma mark --接收数据变化的通知
+- (void)getDataBaseInfo:(NSNotification *)nocation{
+    //当接受到数据库更新的小时时候，讲此变量至为true，之后根据此变量在viewWillAppear方法内判断是否从新加载数据库内容
+    databaseReload = YES;
+}
+- (void)viewWillAppear:(BOOL)animated
+{
+    if (databaseReload){
+        [mineView loadData:@"mine"];
+        databaseReload = NO;
+    }
 }
 
 

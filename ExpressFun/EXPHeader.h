@@ -19,6 +19,8 @@
 #define SCREEN_WIDTH  [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define BaseUrl  @"https://backblog.me/api"
+#define DateBaseChange @"DateBaseChange"
+
 
 //头文件导入
 #import <UIKit/UIKit.h>
@@ -32,6 +34,8 @@
 #import "UIView+Category.h"
 #import "ShareExpressionViewController.h"//表情完成分享页
 #import "AppDelegate.h"
+#import "ExpressModel+CoreDataClass.h"
+
 
 
 
@@ -52,6 +56,8 @@
 #import "SVProgressHUD.h" //toast
 #import "UIImageView+WebCache.h"//img
 #import "Masonry.h" //auto layout
+#import "FLAnimatedImageView.h"
+#import "FLAnimatedImage.h"
 
 
 

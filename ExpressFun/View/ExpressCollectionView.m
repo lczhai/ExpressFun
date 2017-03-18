@@ -16,6 +16,7 @@
     int hotPageIndex;
     int newestPageIndex;
     AppDelegate *appDelegate;
+    NSManagedObjectContext *context;//coredata上下文
 }
 
 
@@ -44,10 +45,6 @@
         
         [self loadData:keyword];
         
-       
-
-        
-        
         //创建网格布局对象
         self.fl = [[UICollectionViewFlowLayout alloc]init];
         //设置滑动方向为竖直滑动
@@ -62,7 +59,7 @@
             _collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
                 [self loadData:keyword];
             }];
-        }else if ([keyword isEqualToString:@"recommend"]){
+        }else if ([keyword isEqualToString:@"newest"]){
             [_collectionView registerClass:[ExpressCollectionCell class] forCellWithReuseIdentifier:keyword];
             _collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
                 newestPageIndex = 0;
@@ -91,7 +88,7 @@
         }
         
         //定义每个UICollectionView 横向的间距
-        self.fl.minimumLineSpacing = 40;
+        self.fl.minimumLineSpacing = 20;
         //定义每个UICollectionView 的边距距
         self.fl.sectionInset = UIEdgeInsetsMake(20, 15, 20, 15);//上左下右
         
@@ -118,7 +115,7 @@
     
     if([keyword isEqualToString:@"goodluck"]){
         [DataControl netGetRequestWithRequestCode:0 URL:@"/goodluck" parameters:nil callBackDelegate:self];
-    }else if ([keyword isEqualToString:@"recommend"]){
+    }else if ([keyword isEqualToString:@"newest"]){
         NSString *urlString = [NSString stringWithFormat:@"/list?begin=%d&offset=%d",newestPageIndex,pageSize];
         [DataControl netGetRequestWithRequestCode:1 URL:urlString parameters:nil callBackDelegate:self];
     }
@@ -129,9 +126,12 @@
     }
     else{
         NSLog(@"我的制作");
+        [self initDataBase];
         [self getAllDiyImage];
+        
     }
 }
+
 
 
 //网络请求成功回调
@@ -197,7 +197,7 @@
 {
     if([pageName isEqualToString:@"goodluck"]){
         return luckSource.count;
-    }else if ([pageName isEqualToString:@"recommend"]){
+    }else if ([pageName isEqualToString:@"newest"]){
         return newestSource.count;
     }
     else if ([pageName isEqualToString:@"hot"]){
@@ -220,16 +220,16 @@
     
     if([pageName isEqualToString:@"goodluck"]){
         return [self showCell:@"goodluck" collectionView:collectionView indexPath:indexPath withArray:luckSource];
-    }else if ([pageName isEqualToString:@"recommend"]){
-        return [self showCell:@"recommend" collectionView:collectionView indexPath:indexPath withArray:newestSource];
+    }else if ([pageName isEqualToString:@"newest"]){
+        return [self showCell:@"newest" collectionView:collectionView indexPath:indexPath withArray:newestSource];
     }
     else if ([pageName isEqualToString:@"hot"]){
         return [self showCell:@"hot" collectionView:collectionView indexPath:indexPath withArray:hotSource];
     }else{
         ExpressCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"mine" forIndexPath:indexPath];
         
-        cell.imgView.image = [UIImage imageWithData:[mineSource[indexPath.row] objectForKey:@"imageData"]];
-        cell.text.text = [mineSource[indexPath.row] objectForKey:@"imageName"];
+            cell.imgView.image = [UIImage imageWithData:[mineSource[indexPath.row] valueForKey:@"imageData"]];
+            cell.text.text = [mineSource[indexPath.row] valueForKey:@"imageName"];
         return cell;
     }
 }
@@ -249,7 +249,7 @@
     if([pageName isEqualToString:@"goodluck"]){
         NSString *urlString =[[luckSource[indexPath.row] objectForKey:@"path"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         _block(urlString,[luckSource[indexPath.row] objectForKey:@"name"]);
-    }else if ([pageName isEqualToString:@"recommend"]){
+    }else if ([pageName isEqualToString:@"newest"]){
         NSString *urlString =[[newestSource[indexPath.row] objectForKey:@"path"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         _block(urlString,[luckSource[indexPath.row] objectForKey:@"name"]);
     }
@@ -257,7 +257,7 @@
         NSString *urlString =[[hotSource[indexPath.row] objectForKey:@"path"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         _block(urlString,[luckSource[indexPath.row] objectForKey:@"name"]);
     }else{
-        [SVProgressHUD showSuccessWithStatus:@"不行"];
+        _dataBlock([mineSource[indexPath.row] valueForKey:@"imageData"],[mineSource[indexPath.row] valueForKey:@"imageName"],[mineSource[indexPath.row] valueForKey:@"imageId"]);
     }
     #pragma clang diagnostic pop
 }
@@ -281,12 +281,51 @@
 
 //获取数据
 - ( void )getAllDiyImage{
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Expression"];
-    NSArray *result = [appDelegate.managedObjectContext executeFetchRequest:request error:nil];
-    
-    mineSource == nil ? mineSource=[[NSMutableArray alloc]initWithArray:result] : [mineSource addObjectsFromArray:result];
-    
+    [SVProgressHUD dismiss];
+    mineSource == nil ? mineSource=[[NSMutableArray alloc]init] : [mineSource removeAllObjects];
+    [mineSource addObjectsFromArray:[self getMyImages]];
     [self.collectionView reloadData];
 }
+
+
+
+#pragma mark --初始化coredata
+- (void)initDataBase{
+    NSLog(@"进行数据库初始化");
+    NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:nil];
+    
+    NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc]initWithManagedObjectModel:model];
+    
+    //找到你想存放数据库的路径(document)
+    NSString *dbPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    //设置数据库存放路径
+    NSURL *url = [NSURL fileURLWithPath:[dbPath stringByAppendingPathComponent:@"ExpressModel.sqlite"]];
+    
+    // 添加持久化存储库，这里使用SQLite作为存储库
+    NSError *error = nil;
+    NSPersistentStore *store = [psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error];
+    if (store == nil) { // 直接抛异常
+        [NSException raise:@"数据库添加错误" format:@"%@", [error localizedDescription]];
+    }
+    // 初始化上下文，设置persistentStoreCoordinator属性
+    context = [[NSManagedObjectContext alloc] init];
+    context.persistentStoreCoordinator = psc;
+}
+
+#pragma mark 获取数据库数据
+- (NSArray *)getMyImages{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init]; //创建请求
+    request.entity = [NSEntityDescription entityForName:@"ExpressModel" inManagedObjectContext:context];//找到我们的Person
+    //    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uid = %@", @"001"];//创建谓词语句，条件是uid等于001
+    //    request.predicate = predicate; //赋值给请求的谓词语句
+    NSError *error = nil;
+    NSArray *objs = [context executeFetchRequest:request error:&error];//执行我们的请求
+    if (error) {
+        [NSException raise:@"查询错误" format:@"%@", [error localizedDescription]];//抛出异常
+    }
+    return objs;
+}
+
 
 @end

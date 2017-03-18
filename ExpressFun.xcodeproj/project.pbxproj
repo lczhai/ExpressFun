@@ -54,6 +54,8 @@
 		2BDBA3FE1E782DA300E6A694 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BDBA3FD1E782DA300E6A694 /* ImageIO.framework */; };
 		2BDBA4001E782DB900E6A694 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BDBA3FF1E782DB900E6A694 /* Foundation.framework */; };
 		2BDBA4031E78467C00E6A694 /* ColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDBA4021E78467C00E6A694 /* ColorView.m */; };
+		2BE07F9F1E7D02CE0060468C /* ExpressModel+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE07F9C1E7D02CE0060468C /* ExpressModel+CoreDataClass.m */; };
+		2BE07FA01E7D02CE0060468C /* ExpressModel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE07F9E1E7D02CE0060468C /* ExpressModel+CoreDataProperties.m */; };
 		69FAED33D4FBB5E4813E1A4D /* libPods-ExpressFunTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3CD9581F44768BB8A23D15 /* libPods-ExpressFunTests.a */; };
 		7717E4E1F2F975E2D9CCEE3B /* libPods-ExpressFunUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4ECADD4AEBF6BCCC9E027A /* libPods-ExpressFunUITests.a */; };
 		C457BACAC713E5FE0907032C /* libPods-ExpressFun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA12E0CAE561C2F0B797777 /* libPods-ExpressFun.a */; };
@@ -166,6 +168,10 @@
 		2BDBA3FF1E782DB900E6A694 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2BDBA4011E78467C00E6A694 /* ColorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorView.h; sourceTree = "<group>"; };
 		2BDBA4021E78467C00E6A694 /* ColorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorView.m; sourceTree = "<group>"; };
+		2BE07F9B1E7D02CE0060468C /* ExpressModel+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ExpressModel+CoreDataClass.h"; sourceTree = "<group>"; };
+		2BE07F9C1E7D02CE0060468C /* ExpressModel+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ExpressModel+CoreDataClass.m"; sourceTree = "<group>"; };
+		2BE07F9D1E7D02CE0060468C /* ExpressModel+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ExpressModel+CoreDataProperties.h"; sourceTree = "<group>"; };
+		2BE07F9E1E7D02CE0060468C /* ExpressModel+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ExpressModel+CoreDataProperties.m"; sourceTree = "<group>"; };
 		2C95C4DE04DE1D35DA3D25C6 /* Pods-ExpressFunTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpressFunTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ExpressFunTests/Pods-ExpressFunTests.release.xcconfig"; sourceTree = "<group>"; };
 		2DA12E0CAE561C2F0B797777 /* libPods-ExpressFun.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ExpressFun.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54611A0222399564377AE11F /* Pods-ExpressFun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpressFun.release.xcconfig"; path = "Pods/Target Support Files/Pods-ExpressFun/Pods-ExpressFun.release.xcconfig"; sourceTree = "<group>"; };
@@ -261,12 +267,13 @@
 		2BA3723E1E758F5A00D4AF71 /* ExpressFun */ = {
 			isa = PBXGroup;
 			children = (
+				2BE07F761E7CF8D80060468C /* CoreData */,
 				2BD21C561E7BE061009F7F87 /* Model */,
+				2BA372751E75911C00D4AF71 /* View */,
+				2BA372771E75917600D4AF71 /* ViewController */,
 				2B67D20B1E76DCF20097EE08 /* Other */,
 				2BA372781E75918900D4AF71 /* Components */,
-				2BA372771E75917600D4AF71 /* ViewController */,
 				2BA372761E75912900D4AF71 /* Category */,
-				2BA372751E75911C00D4AF71 /* View */,
 				2BA372421E758F5A00D4AF71 /* AppDelegate.h */,
 				2BA372431E758F5A00D4AF71 /* AppDelegate.m */,
 				2BA3723F1E758F5A00D4AF71 /* Supporting Files */,
@@ -469,6 +476,17 @@
 				2BDBA3D81E78248F00E6A694 /* XMShareWeiboUtil.m */,
 			);
 			path = ShareUtil;
+			sourceTree = "<group>";
+		};
+		2BE07F761E7CF8D80060468C /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				2BE07F9B1E7D02CE0060468C /* ExpressModel+CoreDataClass.h */,
+				2BE07F9C1E7D02CE0060468C /* ExpressModel+CoreDataClass.m */,
+				2BE07F9D1E7D02CE0060468C /* ExpressModel+CoreDataProperties.h */,
+				2BE07F9E1E7D02CE0060468C /* ExpressModel+CoreDataProperties.m */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		495490257D3EE7ADFA571ACE /* Pods */ = {
@@ -800,7 +818,9 @@
 				2BDBA3EC1E78249000E6A694 /* XMShareView.m in Sources */,
 				2BDBA3E81E78249000E6A694 /* XMShareQQUtil.m in Sources */,
 				2B67D2121E76F3B10097EE08 /* HotExpCollectionView.m in Sources */,
+				2BE07FA01E7D02CE0060468C /* ExpressModel+CoreDataProperties.m in Sources */,
 				2B67D2041E76CE7D0097EE08 /* ExpressCollectionCell.m in Sources */,
+				2BE07F9F1E7D02CE0060468C /* ExpressModel+CoreDataClass.m in Sources */,
 				2BDBA3EB1E78249000E6A694 /* XMShareWeiboUtil.m in Sources */,
 				2BA372441E758F5A00D4AF71 /* AppDelegate.m in Sources */,
 				2BA3724D1E758F5A00D4AF71 /* ExpressFun.xcdatamodeld in Sources */,

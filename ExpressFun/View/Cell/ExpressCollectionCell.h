@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "FLAnimatedImageView.h"
 @interface ExpressCollectionCell : UICollectionViewCell
 
-@property(nonatomic ,strong)UIImageView *imgView;
-@property(nonatomic ,strong)UILabel *text;
+@property(nonatomic ,strong) FLAnimatedImageView *imgView;
+@property(nonatomic ,strong) UILabel *text;
 
 
 

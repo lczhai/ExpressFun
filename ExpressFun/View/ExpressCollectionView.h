@@ -11,6 +11,7 @@
 @interface ExpressCollectionView : UIView<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout,NetWorkCallbackDelegate,UIApplicationDelegate>
 
 @property (nonatomic,copy) void (^block)(NSString *str,NSString *name);
+@property (nonatomic,copy) void (^dataBlock)(NSData *data,NSString *name,NSString *imgId);
 
 //定义集合视图
 @property  UICollectionView *collectionView;
@@ -23,9 +24,14 @@
 @property (nonatomic) NSMutableArray *mineSource;
 
 
+//初始化
+- (instancetype)initWithFrame:(CGRect)frame withKeyword:(NSString *)keyword;
 
-- (instancetype)initWithFrame:(CGRect)frame withKeyword:(NSString *)keyword
-;
+
+//加载数据
+- (void)loadData:(NSString *)keyword;
+
+
 
 
 @end

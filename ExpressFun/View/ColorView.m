@@ -42,8 +42,6 @@
         
         for(int j=1;j<=colorArray.count/2;j++){
             UIButton *colorButton = [[UIButton alloc]initWithFrame:CGRectMake(15*j+buttonWidth*(j-1), 10+40*i, buttonWidth, 30)];
-            NSLog(@"x:%f",colorButton.frame.origin.x);
-            NSLog(@"y:%f",colorButton.frame.origin.y);
             colorButton.backgroundColor = colorArray[(j-1)+(i*(colorArray.count/2))];
             colorButton.tag = j+(i*(colorArray.count/2)) ;
             colorButton.layer.borderColor = [UIColor whiteColor].CGColor;

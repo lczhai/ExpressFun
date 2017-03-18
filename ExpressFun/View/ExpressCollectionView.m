@@ -136,7 +136,7 @@
 
 //网络请求成功回调
 -(void)callBackWithData:(id)data requestCode:(int)requestCode{
-    [SVProgressHUD dismiss];
+    
     if(requestCode == 0){
          luckSource == nil ? luckSource = [[NSMutableArray alloc]init] : [luckSource removeAllObjects];
         [luckSource addObjectsFromArray:data];
@@ -153,8 +153,6 @@
         [self.collectionView reloadData];
         [self.collectionView.mj_header endRefreshing];
         [self.collectionView.mj_footer endRefreshing];
-    }else{
-        NSLog(@"");
     }
 }
 
@@ -251,11 +249,11 @@
         _block(urlString,[luckSource[indexPath.row] objectForKey:@"name"]);
     }else if ([pageName isEqualToString:@"newest"]){
         NSString *urlString =[[newestSource[indexPath.row] objectForKey:@"path"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        _block(urlString,[luckSource[indexPath.row] objectForKey:@"name"]);
+        _block(urlString,[newestSource[indexPath.row] objectForKey:@"name"]);
     }
     else if ([pageName isEqualToString:@"hot"]){
         NSString *urlString =[[hotSource[indexPath.row] objectForKey:@"path"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        _block(urlString,[luckSource[indexPath.row] objectForKey:@"name"]);
+        _block(urlString,[hotSource[indexPath.row] objectForKey:@"name"]);
     }else{
         _dataBlock([mineSource[indexPath.row] valueForKey:@"imageData"],[mineSource[indexPath.row] valueForKey:@"imageName"],[mineSource[indexPath.row] valueForKey:@"imageId"]);
     }
@@ -281,7 +279,6 @@
 
 //获取数据
 - ( void )getAllDiyImage{
-    [SVProgressHUD dismiss];
     mineSource == nil ? mineSource=[[NSMutableArray alloc]init] : [mineSource removeAllObjects];
     [mineSource addObjectsFromArray:[self getMyImages]];
     [self.collectionView reloadData];

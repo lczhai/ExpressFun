@@ -103,14 +103,12 @@
 #pragma mark --保存到本地数据库
 - (void)saveToDataBase:(id)sender{
         if(_completeImageId == nil){
-            NSLog(@"准备存入数据库");
             //将处理好的图片存入数据库
             NSData *imageData = UIImagePNGRepresentation(completeImage);
             [self insertImageToDataBaseWithImageData:imageData andImageName:_completeImageName];
             //发出通知数据库有变化
             [[NSNotificationCenter defaultCenter]postNotificationName:@"DateBaseChange" object:@""];
         }else{
-            NSLog(@"准备修改数据库");
             NSData *imageData = UIImagePNGRepresentation(completeImage);
             [self updateImageByimageId:_completeImageId andImageData:imageData];
     
@@ -135,7 +133,6 @@
     }else{
         [SVProgressHUD showSuccessWithStatus:@"已放入相册啦(*^__^*)"];
     }
-    NSLog(@"image = %@, error = %@, contextInfo = %@", image, error, contextInfo);
 }
 
 
@@ -192,7 +189,6 @@
     NSArray * imgs = [self getAllImages];
     NSString *imgId = [NSString stringWithFormat:@"%d",(int)(imgs.count+1)];
     
-    NSLog(@"imageid:%@",imgId);
     
     [mObject setValue:data forKey:@"imageData"];
     [mObject setValue:name forKey:@"imageName"];

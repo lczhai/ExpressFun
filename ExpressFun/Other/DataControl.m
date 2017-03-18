@@ -38,12 +38,15 @@
 					NSData *data = [[responesDic objectForKey:@"datas"] dataUsingEncoding:NSUTF8StringEncoding];
 					NSDictionary *canshu = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
 					[callBackDelehate callBackWithData:canshu requestCode:requestCode];
-					
 				}
 				else
 				{
 					[callBackDelehate callBackWithData:[responesDic objectForKey:@"datas"] requestCode:requestCode];
 				}
+                
+                if([url isEqualToString:@"/goodluck"]){
+                    [SVProgressHUD dismiss];
+                }
 				
 			}
 		}
@@ -87,7 +90,6 @@
             
             
             if (callBackDelehate != nil) {
-                
                 if ([[responesDic objectForKey:@"datas"] isKindOfClass:[NSString class]]) {
                     NSData *data = [[responesDic objectForKey:@"datas"] dataUsingEncoding:NSUTF8StringEncoding];
                     NSDictionary *canshu = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];

@@ -137,8 +137,6 @@
 {
     UIImage * newImage = [_baseImageView convertViewToImage];
     
-
-    
     ShareExpressionViewController *shareViewController = [[ShareExpressionViewController alloc]init];
     shareViewController.completeImage =  newImage;
     shareViewController.completeImageName = _sourceImageName;

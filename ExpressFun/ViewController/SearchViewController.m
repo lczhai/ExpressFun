@@ -143,7 +143,6 @@
 #pragma mark --点击搜索按钮事件
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    NSLog(@"%@",searchBar.text);
     [searchBox resignFirstResponder];
     NSString *urlString = [NSString stringWithFormat:@"/search/%@?begin=%@&offset=%@",searchBar.text,@"1",@"9999"];
     [DataControl netGetRequestWithRequestCode:2 URL:urlString parameters:nil callBackDelegate:self];

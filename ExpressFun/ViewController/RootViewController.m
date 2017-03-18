@@ -39,7 +39,6 @@
 
 #pragma mark --进入搜索页
 - (void)intoSearch{
-    NSLog(@"search");
     SearchViewController *search = [[SearchViewController alloc]init];
     [self.navigationController pushViewController:search animated:NO];
     

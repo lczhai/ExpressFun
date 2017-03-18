@@ -10,7 +10,6 @@
 		2B67D1FC1E76C65B0097EE08 /* ExpressCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67D1FB1E76C65B0097EE08 /* ExpressCollectionView.m */; };
 		2B67D2041E76CE7D0097EE08 /* ExpressCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67D2021E76CE7D0097EE08 /* ExpressCollectionCell.m */; };
 		2B67D20F1E76DD090097EE08 /* DataControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67D20D1E76DD090097EE08 /* DataControl.m */; };
-		2B67D2121E76F3B10097EE08 /* HotExpCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67D2111E76F3B10097EE08 /* HotExpCollectionView.m */; };
 		2B67D2171E7708FD0097EE08 /* UIImage+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67D2141E7708FD0097EE08 /* UIImage+Category.m */; };
 		2B67D2181E7708FD0097EE08 /* UIView+Category.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67D2161E7708FD0097EE08 /* UIView+Category.m */; };
 		2B67D21B1E7709160097EE08 /* InputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67D21A1E7709160097EE08 /* InputView.m */; };
@@ -56,6 +55,7 @@
 		2BDBA4031E78467C00E6A694 /* ColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BDBA4021E78467C00E6A694 /* ColorView.m */; };
 		2BE07F9F1E7D02CE0060468C /* ExpressModel+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE07F9C1E7D02CE0060468C /* ExpressModel+CoreDataClass.m */; };
 		2BE07FA01E7D02CE0060468C /* ExpressModel+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE07F9E1E7D02CE0060468C /* ExpressModel+CoreDataProperties.m */; };
+		2BE07FA31E7D38450060468C /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BE07FA21E7D38450060468C /* SearchViewController.m */; };
 		69FAED33D4FBB5E4813E1A4D /* libPods-ExpressFunTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3CD9581F44768BB8A23D15 /* libPods-ExpressFunTests.a */; };
 		7717E4E1F2F975E2D9CCEE3B /* libPods-ExpressFunUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB4ECADD4AEBF6BCCC9E027A /* libPods-ExpressFunUITests.a */; };
 		C457BACAC713E5FE0907032C /* libPods-ExpressFun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DA12E0CAE561C2F0B797777 /* libPods-ExpressFun.a */; };
@@ -87,8 +87,6 @@
 		2B67D20C1E76DD090097EE08 /* DataControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataControl.h; sourceTree = "<group>"; };
 		2B67D20D1E76DD090097EE08 /* DataControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataControl.m; sourceTree = "<group>"; };
 		2B67D20E1E76DD090097EE08 /* NetWorkCallbackDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkCallbackDelegate.h; sourceTree = "<group>"; };
-		2B67D2101E76F3B10097EE08 /* HotExpCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HotExpCollectionView.h; sourceTree = "<group>"; };
-		2B67D2111E76F3B10097EE08 /* HotExpCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HotExpCollectionView.m; sourceTree = "<group>"; };
 		2B67D2131E7708FD0097EE08 /* UIImage+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Category.h"; sourceTree = "<group>"; };
 		2B67D2141E7708FD0097EE08 /* UIImage+Category.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Category.m"; sourceTree = "<group>"; };
 		2B67D2151E7708FD0097EE08 /* UIView+Category.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Category.h"; sourceTree = "<group>"; };
@@ -172,6 +170,8 @@
 		2BE07F9C1E7D02CE0060468C /* ExpressModel+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ExpressModel+CoreDataClass.m"; sourceTree = "<group>"; };
 		2BE07F9D1E7D02CE0060468C /* ExpressModel+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ExpressModel+CoreDataProperties.h"; sourceTree = "<group>"; };
 		2BE07F9E1E7D02CE0060468C /* ExpressModel+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ExpressModel+CoreDataProperties.m"; sourceTree = "<group>"; };
+		2BE07FA11E7D38450060468C /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		2BE07FA21E7D38450060468C /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		2C95C4DE04DE1D35DA3D25C6 /* Pods-ExpressFunTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpressFunTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ExpressFunTests/Pods-ExpressFunTests.release.xcconfig"; sourceTree = "<group>"; };
 		2DA12E0CAE561C2F0B797777 /* libPods-ExpressFun.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ExpressFun.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		54611A0222399564377AE11F /* Pods-ExpressFun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpressFun.release.xcconfig"; path = "Pods/Target Support Files/Pods-ExpressFun/Pods-ExpressFun.release.xcconfig"; sourceTree = "<group>"; };
@@ -323,8 +323,6 @@
 				2B67D2001E76CE340097EE08 /* Cell */,
 				2B67D1FA1E76C65B0097EE08 /* ExpressCollectionView.h */,
 				2B67D1FB1E76C65B0097EE08 /* ExpressCollectionView.m */,
-				2B67D2101E76F3B10097EE08 /* HotExpCollectionView.h */,
-				2B67D2111E76F3B10097EE08 /* HotExpCollectionView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -349,6 +347,8 @@
 				2B67D21D1E77092B0097EE08 /* ProcessViewController.m */,
 				2BDBA3A81E78186700E6A694 /* ShareExpressionViewController.h */,
 				2BDBA3A91E78186700E6A694 /* ShareExpressionViewController.m */,
+				2BE07FA11E7D38450060468C /* SearchViewController.h */,
+				2BE07FA21E7D38450060468C /* SearchViewController.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -817,7 +817,6 @@
 				2BDBA4031E78467C00E6A694 /* ColorView.m in Sources */,
 				2BDBA3EC1E78249000E6A694 /* XMShareView.m in Sources */,
 				2BDBA3E81E78249000E6A694 /* XMShareQQUtil.m in Sources */,
-				2B67D2121E76F3B10097EE08 /* HotExpCollectionView.m in Sources */,
 				2BE07FA01E7D02CE0060468C /* ExpressModel+CoreDataProperties.m in Sources */,
 				2B67D2041E76CE7D0097EE08 /* ExpressCollectionCell.m in Sources */,
 				2BE07F9F1E7D02CE0060468C /* ExpressModel+CoreDataClass.m in Sources */,
@@ -836,6 +835,7 @@
 				2BDBA3EA1E78249000E6A694 /* XMShareWechatUtil.m in Sources */,
 				2BDBA3E91E78249000E6A694 /* XMShareUtil.m in Sources */,
 				2B67D21B1E7709160097EE08 /* InputView.m in Sources */,
+				2BE07FA31E7D38450060468C /* SearchViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

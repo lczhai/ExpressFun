@@ -26,7 +26,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"表趣";
-//    self.view.backgroundColor = [UIColor colorWithRed:228/255.0 green:106/255.0 blue:17/255.0 alpha:1.0];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"search"] style:UIBarButtonItemStyleDone target:self action:@selector(intoSearch)];
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     databaseReload = NO;
     toolImgView = [[UIImageView alloc]init];//工具视图，用于通过SDWebimage转换图片
     self.view.backgroundColor = [UIColor whiteColor];
@@ -34,6 +35,14 @@
     self.navigationController.navigationBar.translucent=YES;
     
     [self creatUI];
+}
+
+#pragma mark --进入搜索页
+- (void)intoSearch{
+    NSLog(@"search");
+    SearchViewController *search = [[SearchViewController alloc]init];
+    [self.navigationController pushViewController:search animated:NO];
+    
 }
 
 

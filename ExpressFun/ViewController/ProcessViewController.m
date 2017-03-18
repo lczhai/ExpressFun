@@ -43,13 +43,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"process";
+    self.title = @"";
     _textColor = [UIColor whiteColor];
     appDelegate = (id)[UIApplication sharedApplication].delegate;
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.hidden = YES;
     [self initializeUserInterface];
-    [self initDataBase];
 
 }
 
@@ -77,7 +76,7 @@
 - (void)initializeUserInterface
 {
     //设置背景颜色
-    self.view.backgroundColor = [UIColor blackColor];
+    self.view.backgroundColor = [UIColor colorWithRed:233/255.0 green:233/255.0 blue:233/255.0 alpha:1.0];
     _baseImageView = ({
         UIImageView * imageView = [[UIImageView alloc] initWithImage:sourceImage];
         imageView.userInteractionEnabled = YES;
@@ -138,46 +137,16 @@
 {
     UIImage * newImage = [_baseImageView convertViewToImage];
     
-    
-    if(imageId == nil){
-        NSLog(@"准备存入数据库");
-        //将处理好的图片存入数据库
-        NSData *imageData = UIImagePNGRepresentation(newImage);
-        [self insertImageToDataBaseWithImageData:imageData andImageName:_sourceImageName];
-        //发出通知数据库有变化
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"DateBaseChange" object:@""];
-    }else{
-        NSLog(@"准备修改数据库");
-        NSData *imageData = UIImagePNGRepresentation(newImage);
-        [self updateImageByimageId:imageId andImageData:imageData];
-        
-        //发出通知数据库有变化
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"DateBaseChange" object:@""];
-    }
-    
 
     
     ShareExpressionViewController *shareViewController = [[ShareExpressionViewController alloc]init];
     shareViewController.completeImage =  newImage;
+    shareViewController.completeImageName = _sourceImageName;
+    shareViewController.completeImageId = imageId;
     [self.navigationController pushViewController:shareViewController animated:YES];
-//    [self loadImageFinished:newImage];
 }
 
 
-- (void)loadImageFinished:(UIImage *)image
-{
-    UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:), (__bridge void *)self);
-}
-
-- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
-{
-    if(error){
-        [SVProgressHUD showErrorWithStatus:@"保存失败啦~~~~(>_<)~~~~"];
-    }else{
-        [SVProgressHUD showSuccessWithStatus:@"已保存到本地(*^__^*)"];
-    }
-    NSLog(@"image = %@, error = %@, contextInfo = %@", image, error, contextInfo);
-}
 
 
 
@@ -502,31 +471,33 @@
 - (void)createTopOptionButton
 {
     UIButton * cancelButton  = [UIButton buttonWithType:UIButtonTypeCustom];
-    [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
     [cancelButton addTarget:self action:@selector(cancelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [cancelButton setBackgroundImage:[UIImage imageNamed:@"back"] forState:UIControlStateNormal];
+    [cancelButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.view addSubview:cancelButton];
     
     UIButton * sureButton  = [UIButton buttonWithType:UIButtonTypeCustom];
-    [sureButton setTitle:@"确定" forState:UIControlStateNormal];
     [sureButton addTarget:self action:@selector(sureButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [sureButton setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
+    [sureButton setBackgroundImage:[UIImage imageNamed:@"forward"] forState:UIControlStateNormal];
+    [sureButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.view addSubview:sureButton];
     
     [cancelButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.equalTo(@30);
-        make.size.mas_equalTo(CGSizeMake(80, 30));
+        make.left.mas_equalTo(@30);
+        make.top.mas_equalTo(@50);
+        make.size.mas_equalTo(CGSizeMake(40, 40));
     }];
     
     [sureButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@30);
+        make.top.equalTo(@50);
         make.right.equalTo(@-30);
-        make.size.mas_equalTo(CGSizeMake(80, 30));
+        make.size.mas_equalTo(CGSizeMake(40, 40));
     }];
 }
 
 
 /**
- 创建地步按钮
+ 创建底部按钮
  */
 - (void)createBottomButton
 {
@@ -538,13 +509,15 @@
     
     for (int i = 0; i < bottomTitleArray.count; i ++) {
         UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-        button.backgroundColor = [[UIColor lightGrayColor] colorWithAlphaComponent:0.4];
+        button.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+        button.layer.cornerRadius=3;
+        button.layer.masksToBounds = YES;
         [button setTitle:bottomTitleArray[i] forState:UIControlStateNormal];
         [self.view addSubview:button];
         button.tag = 1000+i;
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(margin + buttonMargin * i);
-            make.bottom.equalTo(@-10);
+            make.bottom.equalTo(@-20);
             make.size.mas_equalTo(CGSizeMake(button_W, 30));
         }];
         
@@ -599,106 +572,6 @@
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureDetected:)];
     [panGestureRecognizer setDelegate:self];
     [removeBut addGestureRecognizer:panGestureRecognizer];
-}
-
-
-
-#pragma mark --数据库操作
-
-
-
-#pragma mark --初始化coredata
-- (void)initDataBase{
-    NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:nil];
-    
-    NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc]initWithManagedObjectModel:model];
-    
-    //找到你想存放数据库的路径(document)
-    NSString *dbPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-    
-    //设置数据库存放路径
-    NSURL *url = [NSURL fileURLWithPath:[dbPath stringByAppendingPathComponent:@"ExpressModel.sqlite"]];
-    
-    // 添加持久化存储库，这里使用SQLite作为存储库
-    NSError *error = nil;
-    NSPersistentStore *store = [psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error];
-    if (store == nil) { // 直接抛异常
-        [NSException raise:@"数据库添加错误" format:@"%@", [error localizedDescription]];
-    }
-    // 初始化上下文，设置persistentStoreCoordinator属性
-    context = [[NSManagedObjectContext alloc] init];
-    context.persistentStoreCoordinator = psc;
-}
-
-
-
-#pragma mark --获取数据中所有数据
-- (NSArray *)getAllImages{
-    NSFetchRequest *request = [[NSFetchRequest alloc] init]; //创建请求
-    request.entity = [NSEntityDescription entityForName:@"ExpressModel" inManagedObjectContext:context];//找到我们的Person
-//    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uid = %@", @"001"];//创建谓词语句，条件是uid等于001
-//    request.predicate = predicate; //赋值给请求的谓词语句
-    NSError *error = nil;
-    NSArray *objs = [context executeFetchRequest:request error:&error];//执行我们的请求
-    if (error) {
-        [NSException raise:@"查询错误" format:@"%@", [error localizedDescription]];//抛出异常
-    }
-    return objs;
-}
-
-#pragma mark --插入数据到数据库
-- (void)insertImageToDataBaseWithImageData:(NSData *)data andImageName:(NSString *)name{
-    NSManagedObject *mObject = [NSEntityDescription    insertNewObjectForEntityForName:@"ExpressModel" inManagedObjectContext:context];
-    
-    NSArray * imgs = [self getAllImages];
-    NSString *imgId = [NSString stringWithFormat:@"%d",(int)(imgs.count+1)];
-    
-    NSLog(@"imageid:%@",imgId);
-    
-    [mObject setValue:data forKey:@"imageData"];
-    [mObject setValue:name forKey:@"imageName"];
-    [mObject setValue:imgId forKey:@"imageId"];
-    
-    
-    NSError *error = nil;
-    BOOL success = [context save:&error];
-    
-    if (!success) {
-        [NSException raise:@"访问数据库错误" format:@"%@", [error localizedDescription]];
-        
-    }else
-    {
-        NSLog(@"插入成功");
-    }
-}
-
-
-#pragma mark --更新数据库中的数据
-- (void)updateImageByimageId:(NSString *)imgId andImageData:(NSData *)data{
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];//创建请求
-    request.entity = [NSEntityDescription entityForName:@"ExpressModel" inManagedObjectContext:context];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"imageId = %@", imgId];//查询条件
-    request.predicate = predicate;
-    NSError *error = nil;
-    NSArray *objs = [context executeFetchRequest:request error:&error];//执行请求
-    if (error) {
-        [NSException raise:@"查询错误" format:@"%@", [error localizedDescription]];
-    }
-    // 遍历数据
-    for (NSManagedObject *obj in objs) {
-        [obj setValue:data forKey:@"imageData"];//查到数据后，将它的name修改成小红
-    }
-    
-    BOOL success = [context save:&error];
-    
-    if (!success) {
-        [NSException raise:@"访问数据库错误" format:@"%@", [error localizedDescription]];
-        
-    }else
-    {
-        NSLog(@"修改成功");
-    }
-
 }
 
 

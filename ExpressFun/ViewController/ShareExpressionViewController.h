@@ -12,6 +12,8 @@
 
 
 @property (strong, nonatomic) UIImage          * completeImage;//已完成图片
+@property (strong,nonatomic)  NSString         * completeImageName;//图片名称
+@property (strong,nonatomic)  NSString         * completeImageId;//数据库中的图片id
 
 
 @end

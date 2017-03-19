@@ -26,11 +26,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"表趣";
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"search"] style:UIBarButtonItemStyleDone target:self action:@selector(intoSearch)];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     databaseReload = NO;
     toolImgView = [[UIImageView alloc]init];//工具视图，用于通过SDWebimage转换图片
-    self.view.backgroundColor = [UIColor whiteColor];
     tagArray =@[@"手气不错",@"新品发售",@"热门搞笑",@"个人制作"];
     self.navigationController.navigationBar.translucent=YES;
     
@@ -85,38 +85,26 @@
     
     //好运数据
     ExpressCollectionView *goodluck = [[ExpressCollectionView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-26-64) withKeyword:@"goodluck"];
-    goodluck.backgroundColor = [UIColor yellowColor];
+    goodluck.backgroundColor = [UIColor whiteColor];
     [expScrollView addSubview:goodluck];
     [goodluck setBlock:^(NSString *urlString, NSString *name) {
-        [toolImgView sd_setImageWithURL:[NSURL URLWithString:urlString]];
-        ProcessViewController *process = [[ProcessViewController alloc]init];
-        process.sourceImage = toolImgView.image;
-        process.sourceImageName = name;
-        [self.navigationController pushViewController:process animated:YES];
+        [self jumpToProcessViewControllerWithImageUrl:urlString andName:name];
     }];
     
     //最新数据
     ExpressCollectionView *newest = [[ExpressCollectionView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*1, 0, self.view.frame.size.width, self.view.frame.size.height-26-64) withKeyword:@"newest"];
-    newest.backgroundColor = [UIColor greenColor];
+    newest.backgroundColor = [UIColor whiteColor];
     [expScrollView addSubview:newest];
     [newest setBlock:^(NSString *urlString, NSString *name) {
-        [toolImgView sd_setImageWithURL:[NSURL URLWithString:urlString]];
-        ProcessViewController *process = [[ProcessViewController alloc]init];
-        process.sourceImage = toolImgView.image;
-        process.sourceImageName = name;
-        [self.navigationController pushViewController:process animated:YES];
+        [self jumpToProcessViewControllerWithImageUrl:urlString andName:name];
     }];
     
 
     ExpressCollectionView *hotView = [[ExpressCollectionView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*2, 0, self.view.frame.size.width, self.view.frame.size.height-26-64) withKeyword:@"hot"];
-    hotView.backgroundColor = [UIColor purpleColor];
+    hotView.backgroundColor = [UIColor whiteColor];
     [expScrollView addSubview:hotView];
     [hotView setBlock:^(NSString *urlString, NSString *name) {
-        [toolImgView sd_setImageWithURL:[NSURL URLWithString:urlString]];
-        ProcessViewController *process = [[ProcessViewController alloc]init];
-        process.sourceImage = toolImgView.image;
-        process.sourceImageName = name;
-        [self.navigationController pushViewController:process animated:YES];
+        [self jumpToProcessViewControllerWithImageUrl:urlString andName:name];
     }];
     
     ExpressCollectionView *mine = [[ExpressCollectionView alloc]initWithFrame:CGRectMake(SCREEN_WIDTH*3, 0, self.view.frame.size.width, self.view.frame.size.height-26-64) withKeyword:@"mine"];
@@ -171,5 +159,22 @@
 }
 
 
+
+#pragma mark --跳转到图片编辑页
+- (void)jumpToProcessViewControllerWithImageUrl:(NSString *)imageUrl andName:(NSString *)imageName{
+    
+    [toolImgView sd_setImageWithURL:[NSURL URLWithString:imageUrl] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        if(!error){
+            NSLog(@"图片：%@",image);
+            ProcessViewController *process = [[ProcessViewController alloc]init];
+            process.sourceImage = toolImgView.image;
+            process.sourceImageName = imageName;
+            [self.navigationController pushViewController:process animated:YES];
+        }else{
+            [SVProgressHUD showErrorWithStatus:@"出错了/(ㄒoㄒ)/"];
+        }
+    }];
+
+}
 
 @end

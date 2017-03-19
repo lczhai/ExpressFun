@@ -44,6 +44,7 @@
         mineSource = [[NSMutableArray alloc]init];
         
         [self loadData:keyword];
+        [SVProgressHUD show];
         
         //创建网格布局对象
         self.fl = [[UICollectionViewFlowLayout alloc]init];
@@ -109,7 +110,6 @@
 
 #pragma mark --加载数据
 - (void)loadData:(NSString *)keyword{
-    [SVProgressHUD show];
     
     //requestCode:  0：手气不错  1：新品发售  2：热门搞笑  3：个人制造
     

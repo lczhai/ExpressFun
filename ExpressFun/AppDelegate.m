@@ -28,6 +28,12 @@
     
     
 
+    //当app首次启动时候，在userdefault创建一个记录id的字段
+    NSString *collectId  =  [[NSUserDefaults standardUserDefaults] objectForKey:imgIds];
+    NSLog(@"isd:%@",collectId);
+    if(collectId == nil){
+        [[NSUserDefaults standardUserDefaults] setObject:@0 forKey:imgIds];
+    }
     
     
     self.window.rootViewController = nav;

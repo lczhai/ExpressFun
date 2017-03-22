@@ -20,6 +20,7 @@
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define BaseUrl  @"https://backblog.me/api"
 #define DateBaseChange @"DateBaseChange"
+#define imgIds  @"localimgIds"
 
 
 //头文件导入

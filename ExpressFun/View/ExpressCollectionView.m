@@ -228,9 +228,14 @@
         
             cell.imgView.image = [UIImage imageWithData:[mineSource[indexPath.row] valueForKey:@"imageData"]];
             cell.text.text = [mineSource[indexPath.row] valueForKey:@"imageName"];
+        
+        
         return cell;
     }
 }
+
+
+
 
 
 

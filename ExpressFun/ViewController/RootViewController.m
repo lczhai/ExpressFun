@@ -18,6 +18,9 @@
     ExpressCollectionView *mineView;
     UIImageView *toolImgView;
     BOOL databaseReload;
+    
+    NSManagedObjectContext *context;//coredata上下文
+
 }
 @end
 
@@ -114,12 +117,30 @@
     mine.backgroundColor = [UIColor brownColor];
     [expScrollView addSubview:mine];
     [mine setDataBlock:^(NSData *data, NSString *name, NSString *imgId) {
-        UIImage *img = [UIImage imageWithData:data];
-        ProcessViewController *process = [[ProcessViewController alloc]init];
-        process.sourceImage = img;
-        process.sourceImageName = name;
-        process.imageId = imgId;
-        [self.navigationController pushViewController:process animated:YES];
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择您想要的操作" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+        UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSLog(@"imgId:%@",imgId);
+            
+            [self deleteImageByImageDataBaseId:imgId];//删除数据库图片
+        }];
+        
+        UIAlertAction *editAction = [UIAlertAction actionWithTitle:@"再编辑" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            UIImage *img = [UIImage imageWithData:data];
+            ProcessViewController *process = [[ProcessViewController alloc]init];
+            process.sourceImage = img;
+            process.sourceImageName = name;
+            process.imageId = imgId;
+            [self.navigationController pushViewController:process animated:YES];
+        }];
+        [alertController addAction:cancelAction];
+        [alertController addAction:editAction];
+        [alertController addAction:deleteAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+        
+        
     }];
 }
 #pragma mark --接收数据变化的通知
@@ -177,4 +198,64 @@
 
 }
 
+
+
+
+#pragma mark --根据ID删除数据库库中的数据
+- (void)deleteImageByImageDataBaseId:(NSString *)imgId{
+    [self initDataBase];//初始化
+    NSFetchRequest *request = [[NSFetchRequest alloc] init]; //创建请求
+    request.entity = [NSEntityDescription entityForName:@"ExpressModel" inManagedObjectContext:context];//对应到表
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"imageId = %@", imgId];//检索数据
+    request.predicate = predicate; //赋值给请求的谓词语句
+    
+    NSError *error = nil;
+    NSArray *objs = [context executeFetchRequest:request error:&error];//执行我们的请求
+    if (error) {
+        [NSException raise:@"查询错误" format:@"%@", [error localizedDescription]];//抛出异常
+    }
+    // 遍历数据 并删除
+    for (NSManagedObject *obj in objs) {
+        [context deleteObject:obj];
+    }
+    
+    BOOL success = [context save:&error];
+    if (!success) {
+        [SVProgressHUD showSuccessWithStatus:@"失败了~~~~(>_<)~~~~"];
+        [NSException raise:@"访问数据库错误" format:@"%@", [error localizedDescription]];
+        
+    }else
+    {
+        NSLog(@"删除成功，sqlite");
+        //发出通知数据库有变化
+        [mineView loadData:@"mine"];
+        [SVProgressHUD showSuccessWithStatus:@"删除成功"];
+    }
+
+
+}
+
+
+#pragma mark --初始化coredata
+- (void)initDataBase{
+    NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:nil];
+    
+    NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc]initWithManagedObjectModel:model];
+    
+    //找到你想存放数据库的路径(document)
+    NSString *dbPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    
+    //设置数据库存放路径
+    NSURL *url = [NSURL fileURLWithPath:[dbPath stringByAppendingPathComponent:@"ExpressModel.sqlite"]];
+    
+    // 添加持久化存储库，这里使用SQLite作为存储库
+    NSError *error = nil;
+    NSPersistentStore *store = [psc addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:url options:nil error:&error];
+    if (store == nil) { // 直接抛异常
+        [NSException raise:@"数据库添加错误" format:@"%@", [error localizedDescription]];
+    }
+    // 初始化上下文，设置persistentStoreCoordinator属性
+    context = [[NSManagedObjectContext alloc] init];
+    context.persistentStoreCoordinator = psc;
+}
 @end

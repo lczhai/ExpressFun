@@ -107,13 +107,13 @@
             NSData *imageData = UIImagePNGRepresentation(completeImage);
             [self insertImageToDataBaseWithImageData:imageData andImageName:_completeImageName];
             //发出通知数据库有变化
-            [[NSNotificationCenter defaultCenter]postNotificationName:@"DateBaseChange" object:@""];
+            [[NSNotificationCenter defaultCenter]postNotificationName:DateBaseChange object:@""];
         }else{
             NSData *imageData = UIImagePNGRepresentation(completeImage);
             [self updateImageByimageId:_completeImageId andImageData:imageData];
     
             //发出通知数据库有变化
-            [[NSNotificationCenter defaultCenter]postNotificationName:@"DateBaseChange" object:@""];
+            [[NSNotificationCenter defaultCenter]postNotificationName:DateBaseChange object:@""];
         }
 
 }
@@ -186,8 +186,12 @@
 - (void)insertImageToDataBaseWithImageData:(NSData *)data andImageName:(NSString *)name{
     NSManagedObject *mObject = [NSEntityDescription    insertNewObjectForEntityForName:@"ExpressModel" inManagedObjectContext:context];
     
-    NSArray * imgs = [self getAllImages];
-    NSString *imgId = [NSString stringWithFormat:@"%d",(int)(imgs.count+1)];
+    
+    
+    NSString *collectId  =  [[NSUserDefaults standardUserDefaults] objectForKey:imgIds];
+    NSString *imgId = [NSString stringWithFormat:@"%d",([collectId intValue]+1)];
+
+
     
     
     [mObject setValue:data forKey:@"imageData"];
@@ -203,6 +207,7 @@
         
     }else
     {
+        [[NSUserDefaults standardUserDefaults] setObject:imgId forKey:imgIds];
         [SVProgressHUD showSuccessWithStatus:@"保存成功(*^__^*)"];
     }
 }

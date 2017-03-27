@@ -10,7 +10,7 @@
 #define XMShare_CommonMarco_h
 
 ///  APP KEY
-#define APP_KEY_WEIXIN            @"wx3b667430e3bf36ba"
+#define APP_KEY_WEIXIN            @"wx00145d7ef1189927"
 
 #define APP_KEY_QQ                @"1106043198"  //表趣
 
@@ -141,7 +141,7 @@ View.layer.borderWidth = BorderWidth;
 ////初始化第三方库
 //- (void)init3rdParty
 //{
-//    [WXApi registerApp:@"wx3b667430e3bf36ba"];
+//    [WXApi registerApp:@"wx00145d7ef1189927"];
 //    
 //    [WeiboSDK enableDebugMode:YES];
 //    [WeiboSDK registerApp:@"4109726756"];

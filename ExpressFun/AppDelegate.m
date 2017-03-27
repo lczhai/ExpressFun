@@ -56,7 +56,7 @@
 //初始化第三方库
 - (void)init3rdParty
 {
-    [WXApi registerApp:@"wx3b667430e3bf36ba"];
+    [WXApi registerApp:@"wx00145d7ef1189927"];
     
     [WeiboSDK enableDebugMode:YES];
     [WeiboSDK registerApp:@"2752862027"];//表趣

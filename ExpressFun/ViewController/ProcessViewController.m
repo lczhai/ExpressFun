@@ -33,6 +33,7 @@
 @implementation ProcessViewController
 {
     AppDelegate *appDelegate;
+    ColorView *colorview;
     NSManagedObjectContext *context;//coredata上下文
 }
 
@@ -154,6 +155,9 @@
  */
 - (void)rotateImageViewButtonPressed:(UIButton *)sender
 {
+    
+    [colorview removeFromSuperview];//remo colorview
+    
     UIImage * newImage = [UIImage image:_baseImageView.image rotation:UIImageOrientationLeft];
     
 //    CGSize newImageSize = newImage.size;
@@ -176,8 +180,10 @@
  */
 - (void)changeColorButtonPressed:(UIButton *)sender{
     
+    [colorview removeFromSuperview];//remo colorview
+    
     UIButton *colorButton = [self.view viewWithTag:1001];
-    ColorView *colorview = [[ColorView alloc]initWithSubView:self.view sureBlock:^(UIColor *color) {
+     colorview = [[ColorView alloc]initWithSubView:self.view sureBlock:^(UIColor *color) {
         [colorButton setTitleColor:color forState:UIControlStateNormal];
         _textColor = color;
     }];
@@ -189,6 +195,7 @@
  */
 - (void)addWordsButtonPressed:(UIButton *)sender
 {
+    [colorview removeFromSuperview];//remo colorview
     weakify(self);
     InputView * inputView = [[InputView alloc] initWithSubView:self.view sureBlock:^(NSString *text) {
         UILabel * label = [[UILabel alloc] init];
@@ -316,6 +323,9 @@
 {
     _currentView.layer.borderWidth = 0;
     
+    
+    [colorview removeFromSuperview];//remo colorview
+    
     for (UIView * view in _currentView.subviews) {
         _currentView.layer.borderWidth = 0;
         if ([view isKindOfClass:[UIButton class]]) {
@@ -338,7 +348,7 @@
 #pragma mark -- gesture
 - (void)sourceImageViewTapGesture:(UITapGestureRecognizer *)tapGesture
 {
-
+    [colorview removeFromSuperview];//remo colorview
     _currentView.layer.borderWidth = 0;
     for (UIView * view in _currentView.subviews) {
         if ([view isKindOfClass:[UIButton class]]) {

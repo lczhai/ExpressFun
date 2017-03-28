@@ -985,6 +985,7 @@
 			baseConfigurationReference = 7B197D51689C4944F021E907 /* Pods-ExpressFun.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = JU79U97ECS;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1009,6 +1010,7 @@
 			baseConfigurationReference = 54611A0222399564377AE11F /* Pods-ExpressFun.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = JU79U97ECS;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

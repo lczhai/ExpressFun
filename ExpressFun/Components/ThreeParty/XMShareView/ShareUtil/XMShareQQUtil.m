@@ -30,7 +30,6 @@
 {
     
     TencentOAuth *tencentOAuth = [[TencentOAuth alloc] initWithAppId:APP_KEY_QQ andDelegate:self];
-    NSLog(@"TencentOAuth accessToken:%@", tencentOAuth.accessToken);
     
 //    NSString *utf8String = self.shareUrl;
 //    NSString *theTitle = self.shareTitle;
@@ -50,13 +49,11 @@
         
         //将内容分享到qq
         QQApiSendResultCode sent = [QQApiInterface sendReq:req];
-        NSLog(@"QQApiSendResultCode:%d", sent);
         
     }else{
         
         //将内容分享到qzone
         QQApiSendResultCode sent = [QQApiInterface SendReqToQZone:req];
-        NSLog(@"Qzone QQApiSendResultCode:%d", sent);
         
     }
 }

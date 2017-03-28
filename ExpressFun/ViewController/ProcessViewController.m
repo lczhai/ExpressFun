@@ -241,7 +241,6 @@
     
     CGSize imageSize = newImage.size;
     
-    NSLog(@"imageSize -- %f -- %f",imageSize.width,imageSize.height);
     
     textView.bounds = CGRectMake(0, 0, imageSize.width + 60, imageSize.height + 60);
     textView.center = CGPointMake(_baseImageView.frame.size.width/2, _baseImageView.frame.size.height/2);

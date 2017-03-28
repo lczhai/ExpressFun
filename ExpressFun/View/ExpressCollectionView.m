@@ -120,12 +120,10 @@
         [DataControl netGetRequestWithRequestCode:1 URL:urlString parameters:nil callBackDelegate:self];
     }
     else if ([keyword isEqualToString:@"hot"]){
-        NSLog(@"热门数据");
         NSString *urlString = [NSString stringWithFormat:@"/list/hot?begin=%d&offset=%d",hotPageIndex,pageSize];
         [DataControl netGetRequestWithRequestCode:2 URL:urlString parameters:nil callBackDelegate:self];
     }
     else{
-        NSLog(@"我的制作");
         [self initDataBase];
         [self getAllDiyImage];
         
@@ -293,7 +291,6 @@
 
 #pragma mark --初始化coredata
 - (void)initDataBase{
-    NSLog(@"进行数据库初始化");
     NSManagedObjectModel *model = [NSManagedObjectModel mergedModelFromBundles:nil];
     
     NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc]initWithManagedObjectModel:model];

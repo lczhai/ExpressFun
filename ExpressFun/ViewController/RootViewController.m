@@ -121,7 +121,6 @@
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"请选择您想要的操作" preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
         UIAlertAction *deleteAction = [UIAlertAction actionWithTitle:@"删除" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            NSLog(@"imgId:%@",imgId);
             
             [self deleteImageByImageDataBaseId:imgId];//删除数据库图片
         }];
@@ -186,7 +185,6 @@
     
     [toolImgView sd_setImageWithURL:[NSURL URLWithString:imageUrl] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         if(!error){
-            NSLog(@"图片：%@",image);
             ProcessViewController *process = [[ProcessViewController alloc]init];
             process.sourceImage = toolImgView.image;
             process.sourceImageName = imageName;
@@ -226,7 +224,6 @@
         
     }else
     {
-        NSLog(@"删除成功，sqlite");
         //发出通知数据库有变化
         [mineView loadData:@"mine"];
         [SVProgressHUD showSuccessWithStatus:@"删除成功"];

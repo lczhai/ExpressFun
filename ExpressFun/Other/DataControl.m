@@ -81,7 +81,7 @@
 		[session.requestSerializer setValue:sessionID forHTTPHeaderField:@"sessionID"];
 	}
 
-//	NSLog(@"发送数据：%@",dic);
+
 	
 	
 	[session POST:urlString parameters:dic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

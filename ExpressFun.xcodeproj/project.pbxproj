@@ -642,13 +642,13 @@
 					};
 					2BA372571E758F5A00D4AF71 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = JU79U97ECS;
+						DevelopmentTeam = DMH6JG3RCC;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2BA3723B1E758F5A00D4AF71;
 					};
 					2BA372621E758F5A00D4AF71 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = JU79U97ECS;
+						DevelopmentTeam = DMH6JG3RCC;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 2BA3723B1E758F5A00D4AF71;
 					};
@@ -953,9 +953,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = DMH6JG3RCC;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -975,6 +977,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1001,9 +1004,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = DMH6JG3RCC;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -1016,6 +1021,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1028,6 +1034,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = DMH6JG3RCC;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1044,6 +1052,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zhailiuchuang.ExpressFun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -1053,6 +1063,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = DMH6JG3RCC;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1069,6 +1081,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.zhailiuchuang.ExpressFun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
@@ -1077,11 +1091,14 @@
 			baseConfigurationReference = 1123E71DDE135151288DF805 /* Pods-ExpressFunTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = JU79U97ECS;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: liuchuang zhai (DMH6JG3RCC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = DMH6JG3RCC;
 				INFOPLIST_FILE = ExpressFunTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = zhailiuchuang.ExpressFunTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ExpressFun.app/ExpressFun";
 			};
 			name = Debug;
@@ -1091,11 +1108,14 @@
 			baseConfigurationReference = 2C95C4DE04DE1D35DA3D25C6 /* Pods-ExpressFunTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = JU79U97ECS;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: liuchuang zhai (DMH6JG3RCC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = DMH6JG3RCC;
 				INFOPLIST_FILE = ExpressFunTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = zhailiuchuang.ExpressFunTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ExpressFun.app/ExpressFun";
 			};
 			name = Release;
@@ -1104,11 +1124,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7F9DAF3D69E960A2E5FE574F /* Pods-ExpressFunUITests.debug.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = JU79U97ECS;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: liuchuang zhai (DMH6JG3RCC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = DMH6JG3RCC;
 				INFOPLIST_FILE = ExpressFunUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = zhailiuchuang.ExpressFunUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_TARGET_NAME = ExpressFun;
 			};
 			name = Debug;
@@ -1117,11 +1140,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DE593D2031A1E510027C0D45 /* Pods-ExpressFunUITests.release.xcconfig */;
 			buildSettings = {
-				DEVELOPMENT_TEAM = JU79U97ECS;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: liuchuang zhai (DMH6JG3RCC)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = DMH6JG3RCC;
 				INFOPLIST_FILE = ExpressFunUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = zhailiuchuang.ExpressFunUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TEST_TARGET_NAME = ExpressFun;
 			};
 			name = Release;

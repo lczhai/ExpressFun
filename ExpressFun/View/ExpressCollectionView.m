@@ -248,34 +248,74 @@
 {
     #pragma clang diagnostic ignored "-Wdeprecated-declarations"
     if([pageName isEqualToString:@"goodluck"]){
-        NSString *urlString =[[luckSource[indexPath.row] objectForKey:@"path"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        _block(urlString,[luckSource[indexPath.row] objectForKey:@"name"]);
+        if([self isNull:luckSource[indexPath.row]]){
+            [SVProgressHUD showErrorWithStatus:@"图坏啦~~~~(>_<)~~~~"];
+        }else{
+            NSString *urlString =[[luckSource[indexPath.row] objectForKey:@"path"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            _block(urlString,[luckSource[indexPath.row] objectForKey:@"name"]);
+        }
+        
     }else if ([pageName isEqualToString:@"newest"]){
-        NSString *urlString =[[newestSource[indexPath.row] objectForKey:@"path"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        _block(urlString,[newestSource[indexPath.row] objectForKey:@"name"]);
+        if([self isNull:newestSource[indexPath.row]]){
+            [SVProgressHUD showErrorWithStatus:@"图坏啦~~~~(>_<)~~~~"];
+        }else{
+            NSString *urlString =[[newestSource[indexPath.row] objectForKey:@"path"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            _block(urlString,[newestSource[indexPath.row] objectForKey:@"name"]);
+        }
     }
     else if ([pageName isEqualToString:@"hot"]){
-        NSString *urlString =[[hotSource[indexPath.row] objectForKey:@"path"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        _block(urlString,[hotSource[indexPath.row] objectForKey:@"name"]);
+        
+        if([self isNull:hotSource[indexPath.row]]){
+            [SVProgressHUD showErrorWithStatus:@"图坏啦~~~~(>_<)~~~~"];
+        }else{
+            NSString *urlString =[[hotSource[indexPath.row] objectForKey:@"path"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            _block(urlString,[hotSource[indexPath.row] objectForKey:@"name"]);
+        }
     }else{
         _dataBlock([mineSource[indexPath.row] valueForKey:@"imageData"],[mineSource[indexPath.row] valueForKey:@"imageName"],[mineSource[indexPath.row] valueForKey:@"imageId"]);
     }
     #pragma clang diagnostic pop
 }
 
+#pragma mark --判断数组元素为空
+- (BOOL)isNull:(NSDictionary *)obj{
+    if(obj == nil || [obj isEqual:[NSNull null]]){
+        return YES;
+    }else{
+        return NO;
+    }
+}
+
+
 
 #pragma mark --生成cell
 - (ExpressCollectionCell *)showCell:(NSString *)idfer collectionView:(UICollectionView *)collectionView indexPath:(NSIndexPath *)indexPath  withArray:(NSArray *)dataSource
 {
-    ExpressCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:idfer forIndexPath:indexPath];
+    ExpressCollectionCell *cell;
+    if(cell == nil){
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:idfer forIndexPath:indexPath];
+    }
     
-    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-    NSString *urlString =[[dataSource[indexPath.row] objectForKey:@"path"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    #pragma clang diagnostic pop
-    NSURL *imgUrl =[NSURL URLWithString:urlString] ;
-    [cell.imgView sd_setImageWithURL:imgUrl placeholderImage:[UIImage imageNamed:@"placehoder"]];
-    cell.text.text = [dataSource[indexPath.row] objectForKey:@"name"];
-    return cell;
+    
+//    NSLog(@"当前cell数量：%ld",(long)indexPath.row);
+//    NSLog(@"datasource:%@",[dataSource[indexPath.row] objectForKey:@"path"]);
+    
+    if(dataSource[indexPath.row] == nil || [dataSource[indexPath.row] isEqual:[NSNull null]]){
+        NSLog(@"失败啦");
+        cell.imgView.image = [UIImage imageNamed:@"placehoder"];
+        cell.text.text = @"失败了";
+        return cell;
+    }else{
+        #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        NSString *urlString =[[dataSource[indexPath.row] objectForKey:@"path"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        #pragma clang diagnostic pop
+        NSURL *imgUrl =[NSURL URLWithString:urlString] ;
+        [cell.imgView sd_setImageWithURL:imgUrl placeholderImage:[UIImage imageNamed:@"placehoder"]];
+        cell.text.text = [dataSource[indexPath.row] objectForKey:@"name"];
+        return cell;
+    }
+    
+    
 }
 
 

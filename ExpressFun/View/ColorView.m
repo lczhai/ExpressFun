@@ -25,7 +25,7 @@
     self = [super init];
     if (self) {
         self.sureColorBlock = sureInputBlock;
-        self.frame = CGRectMake(0, SCREEN_HEIGHT-130, SCREEN_WIDTH, 80);
+        self.frame = CGRectMake(0, SCREEN_HEIGHT-150, SCREEN_WIDTH, 80);
         [subView addSubview:self];
         colorArray = @[[UIColor blackColor],[UIColor grayColor],[UIColor redColor],[UIColor orangeColor],[UIColor yellowColor],[UIColor greenColor],[UIColor cyanColor],[UIColor blueColor],[UIColor purpleColor],[UIColor whiteColor]];
         
@@ -46,6 +46,8 @@
             colorButton.tag = j+(i*(colorArray.count/2)) ;
             colorButton.layer.borderColor = [UIColor whiteColor].CGColor;
             colorButton.layer.borderWidth = 1;
+            colorButton.layer.masksToBounds = YES;
+            colorButton.layer.cornerRadius = 15;
             [colorButton addTarget:self action:@selector(chooseColor:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:colorButton];
         }

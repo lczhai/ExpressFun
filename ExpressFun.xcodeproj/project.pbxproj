@@ -318,8 +318,8 @@
 			children = (
 				2B67D2191E7709160097EE08 /* InputView.h */,
 				2B67D21A1E7709160097EE08 /* InputView.m */,
-				2BDBA4021E78467C00E6A694 /* ColorView.m */,
 				2BDBA4011E78467C00E6A694 /* ColorView.h */,
+				2BDBA4021E78467C00E6A694 /* ColorView.m */,
 				2B67D2001E76CE340097EE08 /* Cell */,
 				2B67D1FA1E76C65B0097EE08 /* ExpressCollectionView.h */,
 				2B67D1FB1E76C65B0097EE08 /* ExpressCollectionView.m */,

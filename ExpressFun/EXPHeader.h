@@ -58,6 +58,8 @@
 #import "Masonry.h" //auto layout
 #import "FLAnimatedImageView.h"
 #import "FLAnimatedImage.h"
+#import "ZFImagePicker.h"//弹出image视图
+#import "ZFActionSheet.h"//照相机选择组件
 
 
 

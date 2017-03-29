@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ZFActionSheet.h"
 //typedef void(^HandleImageBlock)(UIImage * newImage);
 
 
-@interface ProcessViewController : UIViewController
+@interface ProcessViewController : UIViewController<ZFActionSheetDelegate>
 
 //- (instancetype)initWithSourceImage:(UIImage *)image handleImageBlock:(HandleImageBlock)imageBlock;
 @property (strong, nonatomic) UIImage                   * sourceImage;//原图片

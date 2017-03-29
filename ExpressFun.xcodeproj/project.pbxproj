@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B28571D1E8BA92700D896E3 /* ZFActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2857171E8BA92700D896E3 /* ZFActionSheet.m */; };
+		2B28571E1E8BA92700D896E3 /* ZFSheetButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B2857191E8BA92700D896E3 /* ZFSheetButton.m */; };
+		2B28571F1E8BA92700D896E3 /* ZFImagePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B28571C1E8BA92700D896E3 /* ZFImagePicker.m */; };
 		2B67D1FC1E76C65B0097EE08 /* ExpressCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67D1FB1E76C65B0097EE08 /* ExpressCollectionView.m */; };
 		2B67D2041E76CE7D0097EE08 /* ExpressCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67D2021E76CE7D0097EE08 /* ExpressCollectionCell.m */; };
 		2B67D20F1E76DD090097EE08 /* DataControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2B67D20D1E76DD090097EE08 /* DataControl.m */; };
@@ -80,6 +83,12 @@
 
 /* Begin PBXFileReference section */
 		1123E71DDE135151288DF805 /* Pods-ExpressFunTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ExpressFunTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ExpressFunTests/Pods-ExpressFunTests.debug.xcconfig"; sourceTree = "<group>"; };
+		2B2857161E8BA92700D896E3 /* ZFActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFActionSheet.h; sourceTree = "<group>"; };
+		2B2857171E8BA92700D896E3 /* ZFActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFActionSheet.m; sourceTree = "<group>"; };
+		2B2857181E8BA92700D896E3 /* ZFSheetButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFSheetButton.h; sourceTree = "<group>"; };
+		2B2857191E8BA92700D896E3 /* ZFSheetButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFSheetButton.m; sourceTree = "<group>"; };
+		2B28571B1E8BA92700D896E3 /* ZFImagePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZFImagePicker.h; sourceTree = "<group>"; };
+		2B28571C1E8BA92700D896E3 /* ZFImagePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZFImagePicker.m; sourceTree = "<group>"; };
 		2B67D1FA1E76C65B0097EE08 /* ExpressCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressCollectionView.h; sourceTree = "<group>"; };
 		2B67D1FB1E76C65B0097EE08 /* ExpressCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressCollectionView.m; sourceTree = "<group>"; };
 		2B67D2011E76CE7D0097EE08 /* ExpressCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressCollectionCell.h; sourceTree = "<group>"; };
@@ -223,6 +232,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B2857141E8BA92700D896E3 /* ImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				2B2857151E8BA92700D896E3 /* ZFActionSheet */,
+				2B28571A1E8BA92700D896E3 /* ZFImagePicker */,
+			);
+			path = ImagePicker;
+			sourceTree = "<group>";
+		};
+		2B2857151E8BA92700D896E3 /* ZFActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				2B2857161E8BA92700D896E3 /* ZFActionSheet.h */,
+				2B2857171E8BA92700D896E3 /* ZFActionSheet.m */,
+				2B2857181E8BA92700D896E3 /* ZFSheetButton.h */,
+				2B2857191E8BA92700D896E3 /* ZFSheetButton.m */,
+			);
+			path = ZFActionSheet;
+			sourceTree = "<group>";
+		};
+		2B28571A1E8BA92700D896E3 /* ZFImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				2B28571B1E8BA92700D896E3 /* ZFImagePicker.h */,
+				2B28571C1E8BA92700D896E3 /* ZFImagePicker.m */,
+			);
+			path = ZFImagePicker;
+			sourceTree = "<group>";
+		};
 		2B67D2001E76CE340097EE08 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -356,6 +394,7 @@
 		2BA372781E75918900D4AF71 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				2B2857141E8BA92700D896E3 /* ImagePicker */,
 				2BDBA3AB1E78248F00E6A694 /* ThreeParty */,
 			);
 			path = Components;
@@ -598,7 +637,7 @@
 				TargetAttributes = {
 					2BA3723B1E758F5A00D4AF71 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = JU79U97ECS;
+						DevelopmentTeam = DMH6JG3RCC;
 						ProvisioningStyle = Automatic;
 					};
 					2BA372571E758F5A00D4AF71 = {
@@ -815,7 +854,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BDBA4031E78467C00E6A694 /* ColorView.m in Sources */,
+				2B28571F1E8BA92700D896E3 /* ZFImagePicker.m in Sources */,
 				2BDBA3EC1E78249000E6A694 /* XMShareView.m in Sources */,
+				2B28571D1E8BA92700D896E3 /* ZFActionSheet.m in Sources */,
 				2BDBA3E81E78249000E6A694 /* XMShareQQUtil.m in Sources */,
 				2BE07FA01E7D02CE0060468C /* ExpressModel+CoreDataProperties.m in Sources */,
 				2B67D2041E76CE7D0097EE08 /* ExpressCollectionCell.m in Sources */,
@@ -836,6 +877,7 @@
 				2BDBA3E91E78249000E6A694 /* XMShareUtil.m in Sources */,
 				2B67D21B1E7709160097EE08 /* InputView.m in Sources */,
 				2BE07FA31E7D38450060468C /* SearchViewController.m in Sources */,
+				2B28571E1E8BA92700D896E3 /* ZFSheetButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -986,7 +1028,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = JU79U97ECS;
+				DEVELOPMENT_TEAM = DMH6JG3RCC;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ExpressFun/Components/ThreeParty/QQSdk",
@@ -1000,7 +1042,7 @@
 					"$(PROJECT_DIR)/ExpressFun/Components/ThreeParty/libWeiboSDK",
 					"$(PROJECT_DIR)/ExpressFun/Components/ThreeParty/wechatSdk/OpenSDK1.7.1",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = zhailiuchuang.ExpressFun;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhailiuchuang.ExpressFun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1011,7 +1053,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				DEVELOPMENT_TEAM = JU79U97ECS;
+				DEVELOPMENT_TEAM = DMH6JG3RCC;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ExpressFun/Components/ThreeParty/QQSdk",
@@ -1025,7 +1067,7 @@
 					"$(PROJECT_DIR)/ExpressFun/Components/ThreeParty/libWeiboSDK",
 					"$(PROJECT_DIR)/ExpressFun/Components/ThreeParty/wechatSdk/OpenSDK1.7.1",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = zhailiuchuang.ExpressFun;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zhailiuchuang.ExpressFun;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

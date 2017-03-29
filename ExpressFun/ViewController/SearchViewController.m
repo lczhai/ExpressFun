@@ -113,11 +113,14 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *urlString =[[searchSource[indexPath.row] objectForKey:@"path"] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    [toolImgView sd_setImageWithURL:[NSURL URLWithString:urlString]];
-    ProcessViewController *process = [[ProcessViewController alloc]init];
-    process.sourceImage = toolImgView.image;
-    process.sourceImageName = [searchSource[indexPath.row] objectForKey:@"name"];
-    [self.navigationController pushViewController:process animated:YES];
+    [toolImgView sd_setImageWithURL:[NSURL URLWithString:urlString] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+        
+        ProcessViewController *process = [[ProcessViewController alloc]init];
+        process.sourceImage = image;
+        process.sourceImageName = [searchSource[indexPath.row] objectForKey:@"name"];
+        [self.navigationController pushViewController:process animated:YES];
+        
+    }];
 }
 
 
@@ -144,15 +147,22 @@
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     [searchBox resignFirstResponder];
-    NSString *urlString = [NSString stringWithFormat:@"/search/%@?begin=%@&offset=%@",searchBar.text,@"1",@"9999"];
+    NSString *searchText = [searchBar.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *urlString = [NSString stringWithFormat:@"/search/%@?begin=%@&offset=%@",searchText,@"1",@"9999"];
+    [SVProgressHUD show];
     [DataControl netGetRequestWithRequestCode:2 URL:urlString parameters:nil callBackDelegate:self];
 }
 
 
 - (void)callBackWithData:(id)data requestCode:(int)requestCode
 {
+    [SVProgressHUD dismiss];
     searchSource == nil ? searchSource = [[NSMutableArray alloc]init] : [searchSource removeAllObjects];
+    
     [searchSource addObjectsFromArray:data];
+    if(searchSource.count <=0){
+        [SVProgressHUD showInfoWithStatus:@"我搜不到哦~(>_<)~搜搜别的吧!"];
+    }
     [_collectionView reloadData];
 }
 

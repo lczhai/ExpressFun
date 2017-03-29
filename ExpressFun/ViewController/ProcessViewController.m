@@ -279,37 +279,10 @@
  */
 - (void)addBlurryButtonPressed:(UIButton *)sender
 {
-    UIView * blurryView = [[UIView alloc] init];
-    [_baseImageView addSubview:blurryView];
-    
-    
-    
-    if (_currentView) {
-        [self sourceImageViewTapGesture:nil];
-    }
-    _currentView = blurryView;
-    
-    int randomNum = (int)arc4random() % 20;
-    
-    CGFloat imageCenterX = _baseImageView.frame.size.width / 2.0 + randomNum;
-    CGFloat imageCenterY = _baseImageView.frame.size.height / 2.0 + randomNum;
-    
-    blurryView.bounds = CGRectMake(0, 0, 120, 120);
-    blurryView.center = CGPointMake(imageCenterX, imageCenterY);
-    
-    UIImageView * newImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"singledog"]];
-    newImageView.userInteractionEnabled = YES;
-    [blurryView addSubview:newImageView];
-    
-    newImageView.frame = CGRectMake(30, 30, CGRectGetMaxX(_currentView.bounds) -60, CGRectGetMaxY(_currentView.bounds) - 60);
-    
-    UITapGestureRecognizer * baseTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(baseImageViewTapGesture:)];
-    [newImageView addGestureRecognizer:baseTapGesture];
-    
-    UIPanGestureRecognizer * basePan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(baseImageViewPan:)];
-    [newImageView addGestureRecognizer:basePan];
-    
-    [self createOptionButton];
+    NSArray *sheetItemName = @[@"拍照",@"图库"];
+    ZFActionSheet *sheet = [ZFActionSheet actionSheetWithTitle:nil confirms:sheetItemName cancel:@"取消" style:ZFActionSheetStyleDefault];
+    sheet.delegate = self;
+    [sheet show];
     
 }
 
@@ -579,6 +552,81 @@
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureDetected:)];
     [panGestureRecognizer setDelegate:self];
     [removeBut addGestureRecognizer:panGestureRecognizer];
+}
+
+
+
+
+
+#pragma mark --选择图片
+/**
+ *  选择图片
+ *
+ *  @param actionSheet 选择方式的sheet
+ *  @param index       当前选择的index
+ */
+- (void)clickAction:(ZFActionSheet *)actionSheet atIndex:(NSUInteger)index
+{
+    
+    // 1、创建ZFImagePicker对象
+    ZFImagePicker *picker = [[ZFImagePicker alloc] init];
+    picker.isEdit = YES;
+    
+    if (index==0) {
+        // 3、设置图片来源(若不设置默认来自图库)
+        picker.sType = SourceTypeCamera;
+    }else if(index==1){
+        picker.sType = SourceTypeLibrary;
+    }else if(index==2){
+        picker.sType = SourceTypeAlbum;
+    }
+    
+    
+    
+    
+    // 实现block回调
+    picker.pickImage = ^(UIImage *image,NSString *type,NSString *name){
+        NSLog(@"选择图片block回调 \nimage:%@\n type:%@",image,type);
+        
+        //此处为拿到的图片及类型
+        //imgView.image = image;
+        
+        
+        UIView * blurryView = [[UIView alloc] init];
+        [_baseImageView addSubview:blurryView];
+        if (_currentView) {
+            [self sourceImageViewTapGesture:nil];
+        }
+        _currentView = blurryView;
+        
+        int randomNum = (int)arc4random() % 20;
+        
+        CGFloat imageCenterX = _baseImageView.frame.size.width / 2.0 + randomNum;
+        CGFloat imageCenterY = _baseImageView.frame.size.height / 2.0 + randomNum;
+        
+        blurryView.bounds = CGRectMake(0, 0, 120, 120);
+        blurryView.center = CGPointMake(imageCenterX, imageCenterY);
+        
+       // UIImageView * newImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"singledog"]];
+        UIImageView * newImageView = [[UIImageView alloc] initWithImage:image];
+        newImageView.userInteractionEnabled = YES;
+        [blurryView addSubview:newImageView];
+        
+        newImageView.frame = CGRectMake(30, 30, CGRectGetMaxX(_currentView.bounds) -60, CGRectGetMaxY(_currentView.bounds) - 60);
+        
+        UITapGestureRecognizer * baseTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(baseImageViewTapGesture:)];
+        [newImageView addGestureRecognizer:baseTapGesture];
+        
+        UIPanGestureRecognizer * basePan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(baseImageViewPan:)];
+        [newImageView addGestureRecognizer:basePan];
+        
+        [self createOptionButton];
+        
+    };
+    
+    // 4、弹出界面
+    [self presentViewController:picker animated:YES completion:nil];
+    
 }
 
 

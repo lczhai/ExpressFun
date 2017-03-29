@@ -301,7 +301,6 @@
 //    NSLog(@"datasource:%@",[dataSource[indexPath.row] objectForKey:@"path"]);
     
     if(dataSource[indexPath.row] == nil || [dataSource[indexPath.row] isEqual:[NSNull null]]){
-        NSLog(@"失败啦");
         cell.imgView.image = [UIImage imageNamed:@"placehoder"];
         cell.text.text = @"失败了";
         return cell;

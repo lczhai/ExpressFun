@@ -586,8 +586,6 @@
     
     // 实现block回调
     picker.pickImage = ^(UIImage *image,NSString *type,NSString *name){
-        NSLog(@"选择图片block回调 \nimage:%@\n type:%@",image,type);
-        
         //此处为拿到的图片及类型
         //imgView.image = image;
         

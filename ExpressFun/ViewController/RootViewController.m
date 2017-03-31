@@ -38,6 +38,9 @@
     self.navigationController.navigationBar.translucent=YES;
     
     [self creatUI];
+    
+    
+    [self checkVersion];//检查新版本
 }
 
 #pragma mark --进入搜索页
@@ -254,5 +257,63 @@
     // 初始化上下文，设置persistentStoreCoordinator属性
     context = [[NSManagedObjectContext alloc] init];
     context.persistentStoreCoordinator = psc;
+}
+
+
+
+
+
+
+-(void)checkVersion
+{
+    NSString *newVersion;
+    NSURL *url = [NSURL URLWithString:@"http://itunes.apple.com/cn/lookup?id=1220687564"];//这个URL地址是该app在iTunes connect里面的相关配置信息。其中id是该app在app store唯一的ID编号。
+    NSString *jsonResponseString = [NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:nil];
+    
+    NSData *data = [jsonResponseString dataUsingEncoding:NSUTF8StringEncoding];
+    
+    //    解析json数据
+    
+    id json = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    
+    NSArray *array = json[@"results"];
+    
+    for (NSDictionary *dic in array) {
+        
+        
+        newVersion = [dic valueForKey:@"version"];
+        
+    }
+    
+    NSLog(@"通过appStore获取的版本号是：%@",newVersion);
+    
+    //获取本地软件的版本号
+    NSString *localVersion = [[[NSBundle mainBundle]infoDictionary] objectForKey:@"CFBundleVersion"];
+    
+    NSLog(@"app本地版本号是：%@",localVersion);
+    
+    NSString *msg = [NSString stringWithFormat:@"小的发现了新版本哦，发现了更多好玩的东西，这就去更新吧"];
+    
+    //对比发现的新版本和本地的版本
+    if ([newVersion floatValue] > [localVersion floatValue])
+    {
+        
+        [SVProgressHUD dismiss];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"表趣有新版本啦"message:msg preferredStyle:UIAlertControllerStyleAlert];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+        
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"立即升级" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/%E8%A1%A8%E8%B6%A3/id1220687564?mt=8"]];//这里写的URL地址是该app在app store里面的下载链接地址，其中ID是该app在app store对应的唯一的ID编号。
+            NSLog(@"点击现在升级按钮");
+        }]];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"下次再说" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            NSLog(@"点击下次再说按钮");
+        }]];
+        
+        
+    }
 }
 @end

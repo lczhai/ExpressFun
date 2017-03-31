@@ -45,7 +45,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"";
-    _textColor = [UIColor whiteColor];
+    _textColor = [UIColor blackColor];//默认字体颜色
     appDelegate = (id)[UIApplication sharedApplication].delegate;
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.hidden = YES;

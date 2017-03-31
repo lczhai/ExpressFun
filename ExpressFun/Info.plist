@@ -105,7 +105,7 @@
 		<true/>
 	</dict>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>此 App 需要您的同意才能读取媒体资料库</string>
+	<string>表趣 需要您的同意才能读取媒体资料库</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
@@ -136,5 +136,11 @@
 		<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
 		<false/>
 	</dict>
+    <key>NSCameraUsageDescription</key>
+    <string>表趣 需要您的同意,才能访问相机</string>
+    
+    
+    <key>NSMicrophoneUsageDescription</key>
+    <string>表趣 需要您的同意,才能访问麦克风</string>
 </dict>
 </plist>
